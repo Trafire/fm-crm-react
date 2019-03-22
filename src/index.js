@@ -1,11 +1,11 @@
-import React from 'react';
+/*import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import './index.css';
 import store from "./store";
 
 
-/*const salesPersonName = "Antoine";
+const salesPersonName = "Antoine";
 //const salesNumbers = [{objectID: 0, description: "work", number: "905-456-3000"}];
 //const salesPerson = {salesPersonName: salesPersonName, salesNumbers: salesNumbers};
 const clients = [{
@@ -33,7 +33,7 @@ const callList = {
     tab: 0,
     clientIndex: 0,
 
-};*/
+};
 
 
 
@@ -45,3 +45,18 @@ ReactDOM.render(<App callList={store.getState().clients}/>, document.getElementB
 store.dispatch({type:'CLIENTS_CHANGE_FOCUS', clientIndex:3});
 store.dispatch({type:'CLIENTS_CHANGE_FOCUS', clientIndex:5});
 console.log(store.getState().storyState);
+*/
+import { App } from './components/App';
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import store from "./store";
+
+
+
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+);
