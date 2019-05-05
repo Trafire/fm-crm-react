@@ -1,3 +1,6 @@
 export {alertConstants} from "./alert.constants"
 export {userConstants} from "./user.constants"
 export {salespersonConstants} from "./salesperson.constants"
+export {clientConstants} from "./client.constants"
+export {uiConstants} from "./ui.constants"
+export {contactConstants} from "./contact.constants"

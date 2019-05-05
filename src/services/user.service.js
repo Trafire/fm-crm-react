@@ -1,7 +1,7 @@
 //import config from 'config';
-import { authHeader } from '../helpers/auth-header';
+import {authHeader} from '../helpers/auth-header';
 
-const config =  {apiUrl: 'http://localhost:8000'};
+const config = {apiUrl: 'http://localhost:8000'};
 
 export const userService = {
     login,
@@ -17,8 +17,8 @@ function login(username, password) {
     console.log("We logged in");
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, password})
     };
 
     return fetch(`${config.apiUrl}/token-auth/`, requestOptions)
@@ -26,7 +26,6 @@ function login(username, password) {
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user', JSON.stringify(user));
-
             return user;
         });
 }
@@ -41,7 +40,6 @@ function getAll() {
         method: 'GET',
         headers: authHeader()
     };
-
     return fetch(`${config.apiUrl}/api/users/`, requestOptions).then(handleResponse);
 }
 
@@ -58,7 +56,7 @@ function register(user) {
 
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     };
     return fetch(`${config.apiUrl}/api/user/`, requestOptions).then(handleResponse);
@@ -67,11 +65,12 @@ function register(user) {
 function update(user) {
     const requestOptions = {
         method: 'PUT',
-        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        headers: {...authHeader(), 'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     };
 
-    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
+    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);
+    ;
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -95,11 +94,9 @@ function handleResponse(response) {
                 logout();
                 window.location.reload(true);
             }
-
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-
         return data;
     });
 }

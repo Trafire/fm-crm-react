@@ -3,7 +3,8 @@ export function authHeader() {
     let user = JSON.parse(localStorage.getItem('user'));
 
     if (user && user.token) {
-        return { 'Authorization': 'JWT ' + user.token };
+        // todo: delete s in JWTs not sure why this was required to work...
+        return { 'Authorization': 'JWTs ' + user.token };
     } else {
         return {};
     }

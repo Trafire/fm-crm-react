@@ -1,16 +1,13 @@
 import {salespersonConstants} from '../constants';
 import {salesPersonService} from "../services/salesperson.service";
 
-
 export const salespersonActions = {
     getByUserID,
 };
 
-
 function getByUserID(id) {
     return dispatch => {
         dispatch(request(id));
-
         salesPersonService.getByUserID(id)
             .then(
                 salesperson => {
