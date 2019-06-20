@@ -15,7 +15,7 @@ class NavTabs extends React.Component {
 
             <Tab label="Calls"/>
             <Tab label="Sales Data"/>
-            <Tab label="Nothing"/>
+            <Tab label="Sales Person Settings"/>
             <Tab label="Client Settings"/>
         </Tabs>)
     }

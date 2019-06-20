@@ -1,6 +1,10 @@
 import { salespersonConstants } from '../constants';
 
-export function salesperson(state = {}, action) {
+const INITIAL_STATE = {
+
+};
+
+export function salesperson(state = INITIAL_STATE, action) {
     switch (action.type) {
         case salespersonConstants.GET_BY_USER_REQUEST:
             return {

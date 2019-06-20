@@ -9,7 +9,8 @@ import {salesperson} from "./salesperson.reducer";
 import {client} from "./client.reducer"
 import {ui} from "./ui.reducer"
 import {contact} from "./contact.reducer"
-
+import {clientPhoneNumber} from "./clientPhoneNumbers.reducer"
+import {salespersonPhoneNumber} from "./salespersonPhoneNumbers.reducer"
 const rootReducer = combineReducers({
     alert,
     client,
@@ -19,5 +20,7 @@ const rootReducer = combineReducers({
     authentication,
     salesperson,
     ui,
+    clientPhoneNumber,
+    salespersonPhoneNumber,
 });
 export default rootReducer;

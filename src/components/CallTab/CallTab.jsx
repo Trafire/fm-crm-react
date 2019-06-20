@@ -5,36 +5,61 @@ import {unstable_Box as Box} from "@material-ui/core/es/Box";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import {contactActions} from "../../actions";
+import {clientActions, contactActions} from "../../actions";
+import {PhoneDialer} from "./Dialer"
+import Table from '@material-ui/core/Table';
+import {CallTable} from "./CallTable"
+
+
+const styles = {
+    card: {
+        minWidth: 300,
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
+    textField: {
+
+        width: 200,
+    }
+};
 
 class CallTab extends React.Component {
-
     componentDidMount() {
-        let clientCode = this.props.activeClient;
-        let contactIDs = this.props.clientDetails;
-        if (this.props.clientDetails.hasOwnProperty(clientCode)) {
-            let client = this.props.clientDetails[clientCode];
-            for (const code in client.contact_id) {
-                console.log(client.contact_id[code]);
-                let contactCode = client.contact_id[code];
-
-                this.props.dispatch(contactActions.getByContactID(contactCode));
-            }
-        }
-
+        let dispatch = this.props.dispatch;
+        this.props.client.client.forEach(function (item, index) {
+            console.log(item.client_code);
+            dispatch(clientActions.getDetailsByCode(item.client_code));
+        });
     }
 
     componentWillReceiveProps(nextProps) {
+        this.props.client.client.forEach(function (item, index) {
+            console.log(item.client_code);
+            //this.props.dispatch(clientActions.getDetailsByCode(item.client_code));
+        });
+
         if (this.props.activeClient != nextProps.activeClient) {
-            let clientCode = this.props.activeClient;
+            let clientCode = nextProps.activeClient;
+            console.log(clientCode);
             if (this.props.clientDetails.hasOwnProperty(clientCode)) {
-                let client = this.props.clientDetails[clientCode];
+                let client = nextProps.clientDetails[clientCode];
                 for (const code in client.contact_id) {
                     console.log(client.contact_id[code]);
                     let contactCode = client.contact_id[code];
 
                     this.props.dispatch(contactActions.getByContactID(contactCode));
                 }
+            } else {
+                this.props.dispatch(clientActions.getDetailsByCode(clientCode));
             }
         }
     }
@@ -43,56 +68,134 @@ class CallTab extends React.Component {
         const contacts = [];
         const clientCode = this.props.activeClient;
         const client = this.props.clientDetails[clientCode];
+        console.log(clientCode);
         if (this.props.clientDetails.hasOwnProperty(clientCode)) {
+
             for (const code in client.contact_id) {
                 const contactID = client.contact_id[code];
 
                 contacts.push(<ContactCard key={code} clientName={this.props.activeClient} contactID={contactID}
-                                           contact={this.props.contact}/>)
+                                           contact={this.props.contact.contacts}/>)
             }
         }
-        return (<div>{contacts}</div>);
+        return (
+            <Box>
+                <Box display="flex" alignItems="flex-start">
+                    {contacts}
+                    <NewContact></NewContact>
+                </Box>
+                <Box><CallTable client/></Box>
+
+            </Box>
+        );
     }
 }
 
-const cardStyle = {width: 275, height: 400, margin: 20};
+const cardStyle = {width: 200, height: 275, margin: 20};
 
 export function ContactCard(props) {
+
     const clientName = props.clientName;
-    console.log(props.contact);
     const details = [];
-    console.log(props.contact);
 
 
     if (props.contact.hasOwnProperty(props.contactID)) {
         const dialier = [];
+
         for (const phoneID in  props.contact[props.contactID].phone_number_id) {
-            dialier.push(<PhoneDialer id={phoneID}/>);
+            const id = props.contact[props.contactID].phone_number_id[phoneID];
+
+            dialier.push(<PhoneDialer id={id}/>);
         }
+
         return (
 
             <Card style={cardStyle} raised>
-                {clientName}
-                {props.contact[props.contactID].name}
-                {props.contact[props.contactID].job_title}
-                <p>Numbers to call:</p>
-                {dialier}
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {props.contact[props.contactID].name}
+                    </Typography>
+                    <Typography className={styles.title} color="textSecondary" gutterBottom>
+                        {clientName}<br/>
+                        {props.contact[props.contactID].job_title}
+                    </Typography>
+                    <Typography className={styles.bullet} color="textSecondary" gutterBottom>
+                        <p>Phone Numbers</p>
+                        {dialier}
+                    </Typography>
+                </CardContent>
             </Card>
         );
     } else {
         return <div></div>
     }
 }
-function PhoneDialer(props) {
-    return (<div>
-        {props.id}</div>);
+
+export function NewContact(props) {
+
+    return (
+        <Card style={cardStyle} raised>
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                    Add Contact
+                </Typography>
+                <Typography gutterBottom variant="body2" component="body2">
+                    <TextField
+                        required
+                        id="name"
+                        label="Name"
+                        className={styles.textField}
+                        margin="normal"
+                    />
+                    <TextField
+                        required
+                        id="title"
+                        label="Job Title"
+                        className={styles.textField}
+                        margin="normal"
+                    />
+                    <button>Save</button>
+
+                </Typography>
+            </CardContent>
+        </Card>
+    );
+}
+
+
+export function StoreCard(props) {
+    if (props.clients.hasOwnProperty(props.clientCode)) {
+        const client = props.clients[props.clientCode];
+        return (
+            <Card style={cardStyle} raised>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        Store Info
+                    </Typography>
+                    {props.clientCode}
+                    {client.client_name}
+                </CardContent>
+            </Card>
+        );
+    }
+    return (
+        <Card style={cardStyle} raised>
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                    Store Info
+                </Typography>
+                {props.clientCode}
+            </CardContent>
+        </Card>
+    )
 }
 
 function mapStateToProps(state) {
     const {client, contact} = state;
 
     return {
-        contact,
+        contact: contact,
+        client,
         clientDetails: client.clientDetails,
         activeClient: client.activeClient,
     };

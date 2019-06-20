@@ -3,11 +3,12 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {salespersonActions} from '../../actions/salesperson.actions';
 import {clientActions} from "../../actions/client.actions";
-import {uiActions}  from "../../actions/ui.actions";
+//import {salespersonPhoneNumbersActions} from '../../actions/salespersonPhoneNumbers.actions';
+//import {uiActions}  from "../../actions/ui.actions";
 
 
 import {unstable_Box as Box} from '@material-ui/core/Box';
-import {flexbox} from '@material-ui/system';
+//import {flexbox} from '@material-ui/system';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 
@@ -15,22 +16,25 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {CallList} from "../CallList/CallList";
 import {NavTabs,TabContents} from "../UI"
+import {clientPhoneNumbersActions, contactActions} from "../../actions";
+//import {contactActions} from "../../actions";
 
 
 class HomePage extends React.Component {
-    componentDidMount() {
+    componentWillMount() {
         // defaults open tab to "calls"
 
         this.props.dispatch(salespersonActions.getByUserID(this.props.user.user.id));
         this.props.dispatch(clientActions.getByUserID(this.props.user.user.id));
-        this.props.dispatch(clientActions.getDetailsByCode("CAN*ON"));
-
+        this.props.dispatch(contactActions.getBySalesID(4));
+        //this.props.dispatch(clientPhoneNumbersActions.getNumberByContactID(6443))
+        //this.props.dispatch(clientActions.getDetailsByCode("CAN*ON"));
+        //this.props.dispatch(salespersonPhoneNumbersActions.getNumberByContactID("1"));
     }
 
     render() {
-        console.log("RENDER");
-        const {salesperson} = this.props;
-        if (salesperson != null ) {
+        const {salesperson, contacts, client} = this.props;
+        if (salesperson != null &&true) {
             return (
                 <Box>
                     <TopBar/>
@@ -73,16 +77,15 @@ function TopBar(props) {
 }
 
 function mapStateToProps(state) {
-    const {authentication, salesperson, client, ui} = state;
+    const {authentication, salesperson, contact,client} = state;
     const {user} = authentication;
-
-    const clientData = client.client;
     return {
+        client,
         user,
         salesperson: salesperson.salesperson,
+        contact
     };
 }
 const connected_component = connect(mapStateToProps);
 const connectedHomePage = connected_component(HomePage);
 export {connectedHomePage as HomePage};
-

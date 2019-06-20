@@ -2,7 +2,8 @@ import {connect} from "react-redux";
 import React, {Component} from 'react';
 import {unstable_Box as Box} from "@material-ui/core/es/Box";
 import {CallTab} from "../CallTab/CallTab"
-
+import {SalesSettings} from "../SalesSettings/SalesSettings"
+import {SalesAvgByWeek} from "../SalesDataTab/SalesDataTab"
 class TabContents extends React.Component {
 
     render() {
@@ -10,9 +11,10 @@ class TabContents extends React.Component {
             case 0:
                 return <Box><CallTab/></Box>;
             case 1:
-                return <Box>1</Box>;
+                return <Box><SalesAvgByWeek client_code={"CT*EMB"}
+                                            url={"https://us-east-1.online.tableau.com/t/fleurametz/views/fm_sales/clientdash?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no"}/></Box>;
             case 2:
-                return <Box>2</Box>;
+                return <Box><SalesSettings/></Box>;
             case 3:
                 return <Box>3</Box>;
 
