@@ -47,5 +47,5 @@ function mapStateToProps(state) {
 }
 
 const connected_component = connect(mapStateToProps);
-const conmectedDialer = connected_component(PhoneDialer);
-export {conmectedDialer as PhoneDialer};
+const connectedDialer = connected_component(PhoneDialer);
+export {connectedDialer as PhoneDialer};

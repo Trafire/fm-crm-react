@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import React, {Component} from 'react';
+import React from 'react';
 import {unstable_Box as Box} from "@material-ui/core/es/Box";
 import {CallTab} from "../CallTab/CallTab"
 import {SalesSettings} from "../SalesSettings/SalesSettings"

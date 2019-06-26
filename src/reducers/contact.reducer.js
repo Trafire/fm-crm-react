@@ -1,4 +1,4 @@
-import {clientConstants, contactConstants} from '../constants';
+import {contactConstants} from '../constants';
 
 const INITIAL_STATE = {
     calls: [],

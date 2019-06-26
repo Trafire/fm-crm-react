@@ -48,7 +48,7 @@ export class Viz2 extends Component {
 
 export function SalesAvgByWeek(props) {
     let url = props.url;
-    var options = {
+    let options = {
         "Client Code": props.client_code,
         hideTabs: true,
         hideToolbar: true,

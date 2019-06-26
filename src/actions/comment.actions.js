@@ -1,6 +1,5 @@
-import {commentConstants, salespersonConstants} from '../constants';
+import {salespersonConstants} from '../constants';
 import {commentService} from "../services/comment.service"
-import {clientPhoneNumbersService} from "../services/clientPhoneNumbers.service";
 
 export const commentsActions = {
     addComment,

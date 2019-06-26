@@ -8,7 +8,6 @@ import {clientActions} from "../../actions/client.actions";
 
 
 import {unstable_Box as Box} from '@material-ui/core/Box';
-//import {flexbox} from '@material-ui/system';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 
@@ -16,7 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {CallList} from "../CallList/CallList";
 import {NavTabs,TabContents} from "../UI"
-import {clientPhoneNumbersActions, contactActions} from "../../actions";
+import {contactActions} from "../../actions";
 //import {contactActions} from "../../actions";
 
 
@@ -33,7 +32,7 @@ class HomePage extends React.Component {
     }
 
     render() {
-        const {salesperson, contacts, client} = this.props;
+        const {salesperson} = this.props;
         if (salesperson != null &&true) {
             return (
                 <Box>
@@ -77,10 +76,10 @@ function TopBar(props) {
 }
 
 function mapStateToProps(state) {
-    const {authentication, salesperson, contact,client} = state;
+    const {authentication, salesperson, contact} = state;
     const {user} = authentication;
     return {
-        client,
+
         user,
         salesperson: salesperson.salesperson,
         contact

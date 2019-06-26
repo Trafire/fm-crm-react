@@ -1,8 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import {clientPhoneNumbersActions, contactActions} from "../../actions";
+import {contactActions} from "../../actions";
 import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -11,8 +10,9 @@ import Button from '@material-ui/core/Button';
 
 class CallTable extends React.Component {
     render() {
+        let listItems;
         try {
-            var listItems = this.props.contact.calls.map((call) =>
+            listItems = this.props.contact.calls.map((call) =>
                 <TableRow>
                     <TableCell
                         align="center">{this.props.contact.contacts[this.props.clientPhoneNumber[call.phone_number_id].contact_id].name}</TableCell>
@@ -29,7 +29,7 @@ class CallTable extends React.Component {
                 </TableRow>
             );
         } catch (error) {
-            var listItems = [];
+            listItems = [];
             console.warn(error);
             return <div>Loading</div>
         }
@@ -65,7 +65,7 @@ class Checkboxes extends React.Component {
         this.setState({
                 checked: !this.state.checked,
             }
-        )
+        );
         this.props.dispatch(contactActions.setAnswer(this.props.id, this.state.checked))
     }
 
@@ -73,7 +73,7 @@ class Checkboxes extends React.Component {
         return <Checkbox checked={this.state.checked} onChange={this.handlechange}/>
     }
 
-};
+}
 
 function mapStateToProps(state) {
     const {clientPhoneNumber, contact} = state;
@@ -84,5 +84,5 @@ function mapStateToProps(state) {
 }
 
 const connected_component = connect(mapStateToProps);
-const conmectedCallTable = connected_component(CallTable);
-export {conmectedCallTable as CallTable};
+const connectedCallTable = connected_component(CallTable);
+export {connectedCallTable as CallTable};

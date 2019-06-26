@@ -1,11 +1,11 @@
-import Card from '@material-ui/core/Card';
+import React from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {connect} from "react-redux";
 
 
-export class ContactCard extends React.Component {
-    render () {
+class ContactCard extends React.Component {
+    render() {
         return (
             <CardContent>
                 <Typography color="textSecondary" gutterBottom>
@@ -13,14 +13,11 @@ export class ContactCard extends React.Component {
                 </Typography>
 
 
-
             </CardContent>
 
         );
     }
 }
-
-
 function mapStateToProps(state) {
     const {client} = state;
 

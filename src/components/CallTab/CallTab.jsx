@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {clientActions, contactActions} from "../../actions";
 import {PhoneDialer} from "./Dialer"
-import Table from '@material-ui/core/Table';
 import {CallTable} from "./CallTable"
 
 
@@ -47,7 +46,7 @@ class CallTab extends React.Component {
             //this.props.dispatch(clientActions.getDetailsByCode(item.client_code));
         });
 
-        if (this.props.activeClient != nextProps.activeClient) {
+        if (this.props.activeClient !== nextProps.activeClient) {
             let clientCode = nextProps.activeClient;
             console.log(clientCode);
             if (this.props.clientDetails.hasOwnProperty(clientCode)) {
@@ -94,14 +93,9 @@ class CallTab extends React.Component {
 const cardStyle = {width: 200, height: 275, margin: 20};
 
 export function ContactCard(props) {
-
     const clientName = props.clientName;
-    const details = [];
-
-
     if (props.contact.hasOwnProperty(props.contactID)) {
         const dialier = [];
-
         for (const phoneID in  props.contact[props.contactID].phone_number_id) {
             const id = props.contact[props.contactID].phone_number_id[phoneID];
 

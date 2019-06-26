@@ -70,7 +70,6 @@ function update(user) {
     };
 
     return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);
-    ;
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
