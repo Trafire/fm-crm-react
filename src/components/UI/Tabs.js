@@ -3,16 +3,16 @@ import React, {Component} from 'react';
 import {unstable_Box as Box} from "@material-ui/core/es/Box";
 import {CallTab} from "../CallTab/CallTab"
 import {SalesSettings} from "../SalesSettings/SalesSettings"
-import {SalesAvgByWeek} from "../SalesDataTab/SalesDataTab"
+import {VizList} from "../SalesDataTab/SalesDataTab2"
 class TabContents extends React.Component {
 
     render() {
+
         switch (this.props.ui.tabIndex) {
             case 0:
                 return <Box><CallTab/></Box>;
             case 1:
-                return <Box><SalesAvgByWeek client_code={"CT*EMB"}
-                                            url={"https://us-east-1.online.tableau.com/t/fleurametz/views/fm_sales/clientdash?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no"}/></Box>;
+                return <Box><VizList/> </Box>;
             case 2:
                 return <Box><SalesSettings/></Box>;
             case 3:
@@ -29,6 +29,7 @@ function mapStateToProps(state) {
 
     return {
         ui,
+
     };
 }
 
