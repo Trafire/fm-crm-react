@@ -36,7 +36,7 @@ class HomePage extends React.Component {
         if (salesperson != null &&true) {
             return (
                 <Box>
-                    <TopBar/>
+                    <TopBar activeClient={this.props.activeClient}/>
                     <Box display="flex" flexDirection="row">
 
                         <Box order={0}>
@@ -44,6 +44,7 @@ class HomePage extends React.Component {
                         </Box>
                         <Box order={1}>
                             <NavTabs/>
+
                             <TabContents/>
                         </Box>
                     </Box>
@@ -67,22 +68,26 @@ class HomePage extends React.Component {
 
 
 function TopBar(props) {
+    let today = new Date();
+    today = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
     return (
         <AppBar position="static">
             <Typography variant="h6" color="inherit">
-                FleuraMetz Canada Customer Relations
+                FleuraMetz Canada Customer Relations -
+                {props.activeClient}
             </Typography>
         </AppBar>);
 }
 
 function mapStateToProps(state) {
-    const {authentication, salesperson, contact} = state;
+    const {authentication, salesperson, contact, client} = state;
     const {user} = authentication;
     return {
 
         user,
         salesperson: salesperson.salesperson,
-        contact
+        contact,
+        activeClient: client.activeClient,
     };
 }
 const connected_component = connect(mapStateToProps);

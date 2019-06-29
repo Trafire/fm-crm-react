@@ -51,6 +51,9 @@ function VizList(props) {
                     <Tab label="Weekly Sale Trend"/>
                     <Tab label="Sales By Month"/>
                     <Tab label="Average Order Size"/>
+                    <Tab label="Call 1"/>
+                    <Tab label="Call 2"/>
+
                 </Tabs>
             </AppBar>
             <SwipeableViews
@@ -60,6 +63,8 @@ function VizList(props) {
                 <TabContainer dir={0}><SalesData clientCode={props.client.activeClient} index={0}/></TabContainer>
                 <TabContainer dir={0}><SalesData clientCode={props.client.activeClient} index={1}/></TabContainer>
                 <TabContainer dir={0}><SalesData clientCode={props.client.activeClient} index={2}/></TabContainer>
+                <TabContainer dir={0}><SalesData clientCode={props.client.activeClient} index={3}/></TabContainer>
+                <TabContainer dir={0}><SalesData clientCode={props.client.activeClient} index={4}/></TabContainer>
             </SwipeableViews>
         </div>
     );
@@ -75,6 +80,9 @@ class SalesData extends Component {
                 break;
             case 1:
                 url = "https://us-east-1.online.tableau.com/t/fleurametz/views/ClientSalesCRM/SalesByMonth?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
+                break;
+            case 2:
+                url = "https://us-east-1.online.tableau.com/t/fleurametz/views/ClientSalesCRM/AverageOrderSize?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
                 break;
             default:
                 url = "https://us-east-1.online.tableau.com/t/fleurametz/views/ClientSalesCRM/AverageOrderSize?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
@@ -92,8 +100,17 @@ class SalesData extends Component {
             case 1:
                 url = "https://us-east-1.online.tableau.com/t/fleurametz/views/ClientSalesCRM/SalesByMonth?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
                 break;
-            default:
+            case 2:
                 url = "https://us-east-1.online.tableau.com/t/fleurametz/views/ClientSalesCRM/AverageOrderSize?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
+                break;
+            case 3:
+                url = "https://us-east-1.online.tableau.com/t/fleurametz/views/clientcalls/CallAnswered?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
+                break;
+            case 4:
+                url = "https://us-east-1.online.tableau.com/t/fleurametz/views/clientcalls/CallAnsweredByTime?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
+                break;
+            default:
+                url = "https://us-east-1.online.tableau.com/t/fleurametz/views/clientcalls/CallAnsweredByTime?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
         }
 
         return (
@@ -158,9 +175,9 @@ function SalesAvgByWeek(props) {
     let options = {
         "Client Code": props.client_code,
         hideTabs: true,
-        hideToolbar: true,
-        width: "800px",
-        height: "500px",
+        hideToolbar: false,
+        width: "1200px",
+        height: "800px",
     };
     return (<div>
         <Viz2 url={url} options={options} clientCode={props.client_code}/>
