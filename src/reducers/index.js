@@ -11,9 +11,12 @@ import {ui} from "./ui.reducer"
 import {contact} from "./contact.reducer"
 import {clientPhoneNumber} from "./clientPhoneNumbers.reducer"
 import {salespersonPhoneNumber} from "./salespersonPhoneNumbers.reducer"
+import {comment} from "./comment.reducer"
+
 const rootReducer = combineReducers({
     alert,
     client,
+    comment,
     contact,
     registration,
     users,

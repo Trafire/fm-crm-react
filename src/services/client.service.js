@@ -1,5 +1,5 @@
 //import config from 'config';
-import { authHeader } from '../helpers/auth-header';
+import { authHeader,JSONauthHeader } from '../helpers/auth-header';
 
 const config =  {apiUrl: 'http://localhost:8000'};
 
@@ -9,7 +9,19 @@ export const clientService = {
     addContact,
     addContactNumber,
     addContactEmail,
+    setNextCallTime,
+
 };
+
+function setNextCallTime(clientCode, data) {
+    console.log(data);
+    const requestOptions = {
+        method: 'PATCH',
+        headers: JSONauthHeader(),
+        body: JSON.stringify(data)
+    };
+    return fetch(`${config.apiUrl}/api/clients/${clientCode}/`, requestOptions).then(handleResponse);
+}
 
 
 function addContact(data) {

@@ -6,10 +6,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
+import CommentDialog from '../CallTab/CallDialog'
+
 
 class CallTable extends React.Component {
+
     render() {
+
         let listItems;
         try {
             listItems = this.props.contact.calls.map((call) =>
@@ -23,9 +26,10 @@ class CallTable extends React.Component {
                     <TableCell align="center"><Checkboxes id={call.call_id} dispatch={this.props.dispatch}
                                                           checked={call.answered}/></TableCell>
                     <TableCell align="center">
-                        <Button variant="contained"
-                                color="primary" value="{this.props.clientPhoneNumber[call.phone_number_id].number_type}">Add Comment</Button>
+                        <CommentDialog call_id={call.call_id} clientId={this.props.client.clientDetails[this.props.client.activeClient]['client_id']} clientCode={this.props.client.activeClient} salesperson_id={this.props.salesperson.salesperson} dispatch={this.props.dispatch} value={this.props.clientPhoneNumber[call.phone_number_id].phone_number_id}/>
+
                     </TableCell>
+
                 </TableRow>
             );
         } catch (error) {
@@ -35,18 +39,20 @@ class CallTable extends React.Component {
         }
 
         return (
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Number</TableCell>
-                        <TableCell align="center">Time</TableCell>
-                        <TableCell align="center">Answered</TableCell>
-                        <TableCell align="center">Comments</TableCell>
-                    </TableRow>
-                    {listItems}
-                </TableHead>
-            </Table>
+            <div>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell align="right">Number</TableCell>
+                            <TableCell align="center">Time</TableCell>
+                            <TableCell align="center">Answered</TableCell>
+                            <TableCell align="center">Comments</TableCell>
+                        </TableRow>
+                        {listItems}
+                    </TableHead>
+                </Table>
+            </div>
         );
 
     }
@@ -62,11 +68,12 @@ class Checkboxes extends React.Component {
     }
 
     handlechange(e) {
+        this.props.dispatch(contactActions.setAnswer(this.props.id, !this.state.checked));
         this.setState({
                 checked: !this.state.checked,
             }
         );
-        this.props.dispatch(contactActions.setAnswer(this.props.id, this.state.checked))
+
     }
 
     render() {
@@ -76,10 +83,12 @@ class Checkboxes extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const {clientPhoneNumber, contact} = state;
+    const {client, clientPhoneNumber, contact, salesperson} = state;
     return {
+        client,
         clientPhoneNumber,
-        contact: contact
+        contact: contact,
+        salesperson: salesperson.salesperson,
     };
 }
 

@@ -26,9 +26,17 @@ class HomePage extends React.Component {
         this.props.dispatch(salespersonActions.getByUserID(this.props.user.user.id));
         this.props.dispatch(clientActions.getByUserID(this.props.user.user.id));
         this.props.dispatch(contactActions.getBySalesID(4));
+        this.timerID = setInterval(
+            () => this.updateClients(),
+            1000
+        );
         //this.props.dispatch(clientPhoneNumbersActions.getNumberByContactID(6443))
         //this.props.dispatch(clientActions.getDetailsByCode("CAN*ON"));
         //this.props.dispatch(salespersonPhoneNumbersActions.getNumberByContactID("1"));
+    }
+
+    updateClients () {
+        this.props.dispatch(clientActions.getByUserID(this.props.user.user.id));
     }
 
     render() {
@@ -40,7 +48,7 @@ class HomePage extends React.Component {
                     <Box display="flex" flexDirection="row">
 
                         <Box order={0}>
-                            <CallList/>
+                            <CallList updateClients={this.updateClients}/>
                         </Box>
                         <Box order={1}>
                             <NavTabs/>

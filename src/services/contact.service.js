@@ -9,12 +9,12 @@ export const contactService = {
     setCallAnswerStatus,
 };
 
-
 function setCallAnswerStatus(id, status) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
+
     return fetch(`${config.apiUrl}/api/setanswerstatus/${id}/${status}`, requestOptions).then(handleResponse);
 }
 

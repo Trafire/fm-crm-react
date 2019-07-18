@@ -1,18 +1,25 @@
-import { authHeader } from '../helpers/auth-header';
+import { authHeader,JSONauthHeader } from '../helpers/auth-header';
 
 const config =  {apiUrl: 'http://localhost:8000'};
 
 export const commentService = {
-    addComment
+    addComment,
+    getCommentsById
 };
-
+function getCommentsById(id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader(),
+    };
+    return fetch(`${config.apiUrl}/api/comments/`, requestOptions).then(handleResponse);
+}
 function addComment(data) {
     const requestOptions = {
         method: 'POST',
-        headers: authHeader(),
-        body: data
+        headers: JSONauthHeader(),
+        body: JSON.stringify(data)
     };
-    return fetch(`${config.apiUrl}/api/comments/`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/api/comments/create`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

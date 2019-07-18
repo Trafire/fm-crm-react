@@ -7,3 +7,5 @@ export {contactConstants} from "./contact.constants"
 export {clientPhoneNumberConstants} from "./clientPhoneNumbers.constants"
 export {salespersonPhoneNumberConstants} from "./salespersonPhoneNumbers.constants"
 export {commentConstants} from "./comment.constants"
+export {colourConstants} from "./colours.constants"
+

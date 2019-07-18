@@ -8,8 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import {clientActions, contactActions} from "../../actions";
 import {PhoneDialer} from "./Dialer"
 import {CallTable} from "./CallTable"
-
-
+import {CommentsDisplay} from "./../Comments/Comments"
+import {DisplayDate}  from "./../Dates"
 const styles = {
     card: {
         minWidth: 300,
@@ -67,6 +67,8 @@ class CallTab extends React.Component {
         const contacts = [];
         const clientCode = this.props.activeClient;
         const client = this.props.clientDetails[clientCode];
+
+
         console.log(clientCode);
         if (this.props.clientDetails.hasOwnProperty(clientCode)) {
 
@@ -77,16 +79,30 @@ class CallTab extends React.Component {
                                            contact={this.props.contact.contacts}/>)
             }
         }
-        return (
-            <Box>
-                <Box display="flex" alignItems="flex-start">
-                    {contacts}
-                    <NewContact></NewContact>
-                </Box>
-                <Box><CallTable client/></Box>
+        try {
+            let lastCall = new Date(client.last_call);
+            let nextCall = new Date(client.next_call);
+            //todo: change to visual
+            return (
+                <Box>
 
-            </Box>
-        );
+                    <Box  display="flex" alignItems="flex-start">
+                    <DisplayDate displaydate={lastCall} clientCode={clientCode} title={"Last Call"} tip={""}/>
+                    <DisplayDate displaydate={nextCall} client title={"Next Call"} tip={"Double click to Change Time"}/>
+                    </Box>
+                    <Box display="flex" alignItems="flex-start">
+                        {contacts}
+
+                    </Box>
+                    <Box><CommentsDisplay/></Box>
+                    <Box><CallTable client/></Box>
+
+
+                </Box>
+            );
+        } catch {
+            return <div> Select a Client on the Left to Begin</div>;
+        }
     }
 }
 
@@ -192,6 +208,7 @@ function mapStateToProps(state) {
         client,
         clientDetails: client.clientDetails,
         activeClient: client.activeClient,
+
     };
 }
 

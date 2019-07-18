@@ -6,10 +6,31 @@ export const clientActions = {
     getByUserID,
     getDetailsByCode,
     setActiveByCode,
+    setNextCallTime,
     addContact,
     addContactNumber,
     addContactEmail,
 };
+
+function setNextCallTime(client_code, callTime ) {
+    return dispatch => {
+
+        dispatch(request(client_code,callTime));
+        clientService.setNextCallTime(client_code, {
+            'client_code':client_code,
+            'next_call':callTime,
+        })
+            .then(
+                contactId => {
+                    dispatch(success(client_code,callTime));
+                },
+                error => dispatch(failure(error.toString()))
+            );
+    };
+    function request(client_code,callTime) { return { type: clientConstants.SET_NEXT_CALL_TIME_REQUEST, client_code, callTime } }
+    function success(client_code, callTime) { return { type: clientConstants.SET_NEXT_CALL_TIME_SUCCESS, client_code,callTime } }
+    function failure(error) { return { type: clientConstants.SET_NEXT_CALL_TIME_FAILURE, client_code, error } }
+}
 
 function addContact(client_id, job_title,name ) {
     return dispatch => {
