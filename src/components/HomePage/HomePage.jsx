@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {salespersonActions} from '../../actions/salesperson.actions';
 import {clientActions} from "../../actions/client.actions";
+import {commentsActions} from "../../actions/";
 //import {salespersonPhoneNumbersActions} from '../../actions/salespersonPhoneNumbers.actions';
 //import {uiActions}  from "../../actions/ui.actions";
 
@@ -26,9 +27,11 @@ class HomePage extends React.Component {
         this.props.dispatch(salespersonActions.getByUserID(this.props.user.user.id));
         this.props.dispatch(clientActions.getByUserID(this.props.user.user.id));
         this.props.dispatch(contactActions.getBySalesID(4));
+        this.props.dispatch(commentsActions.getByClientID());
+        //this.props.dispatch(commentsActions.getByClientID(0)); //todo: chanege this to update all clients
         this.timerID = setInterval(
             () => this.updateClients(),
-            1000
+            10000
         );
         //this.props.dispatch(clientPhoneNumbersActions.getNumberByContactID(6443))
         //this.props.dispatch(clientActions.getDetailsByCode("CAN*ON"));
@@ -69,7 +72,7 @@ class HomePage extends React.Component {
             alignItems="center"
         >
             Loading... <CircularProgress/>
-
+            <Link to="/login">Logout</Link>
         </Box>);
     }
 }

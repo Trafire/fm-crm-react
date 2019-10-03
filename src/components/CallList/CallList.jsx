@@ -4,16 +4,17 @@ import {connect} from "react-redux";
 import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
-import {clientActions, commentsActions, contactActions} from "../../actions";
+import {clientActions, contactActions} from "../../actions";
 import {withStyles} from '@material-ui/core/styles';
 import {colourConstants} from "../../constants";
+import './CallList.css';
 
 const StyledListItem = withStyles({
     root: {
         'data-freshness > .1' : 'background: colourConstants.BLUE,',
 
         '&:hover': {
-            background: colourConstants.FM_ORANGE,
+            background: colourConstants.FM_PALE_BLUE,
         },
         '&:active': {
             background: colourConstants.FM_ORANGE,
@@ -24,6 +25,9 @@ const StyledListItem = withStyles({
         '&:selected': {
             background: colourConstants.FM_ORANGE,
         },
+    },
+    good: {
+        background: colourConstants.FM_RED,
     },
     activeItem: {
         background: colourConstants.FM_ORANGE,
@@ -52,6 +56,7 @@ class CallList extends React.Component {
         this.props.dispatch(clientActions.setActiveByCode(clientCode));
         this.props.dispatch(contactActions.getCallsMade(clientCode));
 
+
     };
 
 
@@ -59,7 +64,6 @@ class CallList extends React.Component {
 
         const {client} = this.props;
         const elements = client.client;
-        console.log(client);
         const items = elements.map((value) =>
 
 
@@ -68,10 +72,10 @@ class CallList extends React.Component {
                          key={value.client_code}/>
         );
 
-
         return (
             <List style={callListStyle} subheader={<ListSubheader component="div">Client List</ListSubheader>}>
                 {items}
+
             </List>
 
         )
@@ -79,11 +83,22 @@ class CallList extends React.Component {
 }
 
 function ClientItems(props) {
+    let desc = '';
+    if (props.ratio > 1.1) {
+        desc += "bad"
+    }
 
-    return (<StyledListItem button data-freshness={props.ratio}
+    else if (props.ratio > 1) {
+        desc += "ok"
+    }
+    else {
+        desc += "good"
+    }
+
+    return (<StyledListItem className="neutral" button data-freshness={props.ratio}
                             onClick={(e) => props.handleChange(props.client_code, props.client_id, e)}
-                            key={props.client_code}>{props.client_code} - {props.ratio}</StyledListItem>)
-}
+                      key={props.client_code}><span className={desc + " CallList"}>{props.client_code} ~ {parseFloat(props.ratio).toLocaleString("en", {style: "percent"})}</span></StyledListItem>)
+    }
 
 
 function mapStateToProps(state) {
@@ -98,3 +113,4 @@ const
 export {
     connectedCallList as CallList
 };
+//

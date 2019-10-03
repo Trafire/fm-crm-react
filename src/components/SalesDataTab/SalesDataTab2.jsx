@@ -59,6 +59,7 @@ function VizList(props) {
             <SwipeableViews
                 index={value}
                 onChangeIndex={handleChangeIndex}
+                style={{width:1300}}
             >
                 <TabContainer dir={0}><SalesData clientCode={props.client.activeClient} index={0}/></TabContainer>
                 <TabContainer dir={0}><SalesData clientCode={props.client.activeClient} index={1}/></TabContainer>

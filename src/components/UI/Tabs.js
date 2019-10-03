@@ -4,6 +4,11 @@ import {unstable_Box as Box} from "@material-ui/core/es/Box";
 import {CallTab} from "../CallTab/CallTab"
 import {SalesSettings} from "../SalesSettings/SalesSettings"
 import {VizList} from "../SalesDataTab/SalesDataTab2"
+import {ErrorBoundary} from "../ErrorHandling/ErrorBoundary"
+import {ClientSettingsTab} from "../ClientSettingsTab/ClientSettingsTab"
+
+
+
 class TabContents extends React.Component {
 
     render() {
@@ -12,11 +17,11 @@ class TabContents extends React.Component {
             case 0:
                 return <Box><CallTab/></Box>;
             case 1:
-                return <Box><VizList/> </Box>;
+                return <Box><ErrorBoundary><VizList/></ErrorBoundary> </Box>;
             case 2:
                 return <Box><SalesSettings/></Box>;
             case 3:
-                return <Box>3</Box>;
+                return <Box><ErrorBoundary><ClientSettingsTab/></ErrorBoundary></Box>;
 
             default:
                 return <Box>0</Box>;

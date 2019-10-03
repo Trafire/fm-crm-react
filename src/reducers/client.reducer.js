@@ -44,10 +44,8 @@ export function client(state = INITIAL_STATE, action) {
         case  clientConstants.CREATE_NEW_CONTACT_SUCCESS:
             return state;
         case clientConstants.SET_NEXT_CALL_TIME_SUCCESS:
-            console.log("HERE");
             let d = new Date(action.callTime).toISOString();
             //d = d.slice(0,-1)  + "000z";
-            console.log(d);
             return dotProp.set(state, `clientDetails.${action.client_code}.next_call`, d);
             /*return  {...state,
                 clientDetails: {

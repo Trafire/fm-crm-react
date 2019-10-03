@@ -35,24 +35,21 @@ class CallTab extends React.Component {
     componentDidMount() {
         let dispatch = this.props.dispatch;
         this.props.client.client.forEach(function (item, index) {
-            console.log(item.client_code);
             dispatch(clientActions.getDetailsByCode(item.client_code));
         });
     }
 
     componentWillReceiveProps(nextProps) {
-        this.props.client.client.forEach(function (item, index) {
+        /*this.props.client.client.forEach(function (item, index) {
             console.log(item.client_code);
             //this.props.dispatch(clientActions.getDetailsByCode(item.client_code));
-        });
+        });*/
 
         if (this.props.activeClient !== nextProps.activeClient) {
             let clientCode = nextProps.activeClient;
-            console.log(clientCode);
             if (this.props.clientDetails.hasOwnProperty(clientCode)) {
                 let client = nextProps.clientDetails[clientCode];
                 for (const code in client.contact_id) {
-                    console.log(client.contact_id[code]);
                     let contactCode = client.contact_id[code];
 
                     this.props.dispatch(contactActions.getByContactID(contactCode));
@@ -68,8 +65,6 @@ class CallTab extends React.Component {
         const clientCode = this.props.activeClient;
         const client = this.props.clientDetails[clientCode];
 
-
-        console.log(clientCode);
         if (this.props.clientDetails.hasOwnProperty(clientCode)) {
 
             for (const code in client.contact_id) {
@@ -92,7 +87,6 @@ class CallTab extends React.Component {
                     </Box>
                     <Box display="flex" alignItems="flex-start">
                         {contacts}
-
                     </Box>
                     <Box><CommentsDisplay/></Box>
                     <Box><CallTable client/></Box>

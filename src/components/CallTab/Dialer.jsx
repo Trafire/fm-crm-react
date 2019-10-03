@@ -11,7 +11,6 @@ class PhoneDialer extends React.Component {
         this.props.dispatch(clientPhoneNumbersActions.getNumberByContactID(this.props.id));
     }
     makeCall(){
-        console.log(this.props.id);
         clientPhoneNumbersActions.makeCall(this.props.salespersonPhoneNumber.active,this.props.id)
 
     }

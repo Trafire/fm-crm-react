@@ -1,17 +1,28 @@
 import { authHeader,JSONauthHeader } from '../helpers/auth-header';
 
-const config =  {apiUrl: 'http://localhost:8000'};
+//const config =  {apiUrl: 'http://localhost:8000'};
+const config =  {apiUrl: 'https://fmc-crm-252016.appspot.com'};
 
 export const commentService = {
     addComment,
-    getCommentsById
+    deleteComment,
+    getCommentsById,
+    getCommentsByClient,
 };
 function getCommentsById(id) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader(),
     };
-    return fetch(`${config.apiUrl}/api/comments/`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/api/comments/${id}`, requestOptions).then(handleResponse);
+}
+
+function getCommentsByClient(clientCode) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader(),
+    };
+    return fetch(`${config.apiUrl}/api/comments/client/${clientCode}`, requestOptions).then(handleResponse);
 }
 function addComment(data) {
     const requestOptions = {
@@ -20,6 +31,14 @@ function addComment(data) {
         body: JSON.stringify(data)
     };
     return fetch(`${config.apiUrl}/api/comments/create`, requestOptions).then(handleResponse);
+}
+
+function deleteComment(id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: JSONauthHeader(),
+    };
+    return fetch(`${config.apiUrl}/api/comments/${id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

@@ -8,17 +8,22 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import {connect} from "react-redux";
+import {commentsActions} from "../../actions";
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 function CommentsDisplay(props) {
     const initials = props.firstName.substring(0, 1) + props.lastName.substring(0, 1);
     const items = [];
     const active = props.client.activeClient;
+    props.dispatch(commentsActions.getCommentsByClient(active));
     try {
         const activeId = props.client.clientDetails[active].client_id;
 
         for (const [index, comment] of props.comments.entries()) {
             if (comment.client_id === activeId) {
-                items.push(<CommentLine key={index} comment={comment} initials={initials}/>)
+                items.push(<CommentLine key={index} comment={comment} initials={initials} dispatch={props.dispatch}/>)
             }
         }
 
@@ -31,6 +36,20 @@ function CommentsDisplay(props) {
         return <div/>;
     }
 }
+
+function DeleteCommentButton(props) {
+    function delete_comment(){
+        props.dispatch(commentsActions.deleteComment(props.id));
+    }
+
+    return (<IconButton onClick={delete_comment} aria-label="delete">
+            <DeleteIcon />
+        </IconButton>)
+
+
+
+}
+
 
 function CommentLine(props) {
 
@@ -54,12 +73,15 @@ function CommentLine(props) {
                                 variant="body2"
                                 color="textPrimary"
                             >
-                                {date.toString()}
+                                {date.toString()}<DeleteCommentButton id={props.comment.id} dispatch={props.dispatch}/>
                             </Typography>
                             {props.comment.comment}
+
                         </React.Fragment>
+
                     }
                 />
+
             </ListItem>
         </List>
 

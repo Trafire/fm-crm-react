@@ -1,0 +1,13 @@
+.CallList {
+    font-weight: bold;
+}
+
+span.good{
+    color: #78B74A;
+}
+span.ok{
+    color: #F6AA42;
+}
+span.bad{
+    color: #C90039;
+}

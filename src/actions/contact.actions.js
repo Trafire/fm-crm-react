@@ -68,11 +68,11 @@ function getBySalesID(id) {
                 contact => {
                     dispatch(success(id, contact));
                 },
-                error => dispatch(failure(error.toString()))
+                error => dispatch(failure(id, error.toString()))
             );
     };
 
     function request(id) { return { type: contactConstants.GET_BY_SALES_REQUEST, id } }
-    function success(id, contact) { console.log(contact); return { type: contactConstants.GET_BY_SALES_SUCCESS, id, contact} }
-    function failure(id, error) { return { type: contactConstants.GET_BY_SALESFAILURE, id, error } }
+    function success(id, contact) { return { type: contactConstants.GET_BY_SALES_SUCCESS, id, contact} }
+    function failure(id, error) { return { type: contactConstants.GET_BY_SALES_FAILURE, id, error }}
 }
