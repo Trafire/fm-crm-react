@@ -5,6 +5,7 @@ import {CLIENTS_CHANGE_FOCUS, CLIENTS_ADD} from '../constants/actionTypes'
 const INITIAL_STATE = {
     clientIndex: 0,
     clients_list: [],
+    client:[],
 };
 const clientReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {

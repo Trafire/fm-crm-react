@@ -1,14 +1,24 @@
-import { authHeader } from '../helpers/auth-header';
+import {authHeader, JSONauthHeader} from '../helpers/auth-header';
+import {config} from '../constants';
 
 //const config =  {apiUrl: 'http://localhost:8000'};
-const config =  {apiUrl: 'https://fmc-crm-252016.appspot.com'};
+//const config =  {apiUrl: 'https://fmc-crm-252016.appspot.com'};
 
 export const clientPhoneNumbersService = {
     getByContactID,
     makeCall,
+    addNumber
 };
 
-
+function addNumber(data) {
+    console.log(data);
+    const requestOptions = {
+        method: 'POST',
+        headers: JSONauthHeader(),
+        body: JSON.stringify(data)
+    };
+    return fetch(`${config.apiUrl}/api/clientphonenumbers/`, requestOptions).then(handleResponse);
+}
 function makeCall(salesID, clientID) {
     const requestOptions = {
         method: 'GET',

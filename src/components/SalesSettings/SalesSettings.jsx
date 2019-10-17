@@ -32,6 +32,7 @@ class SalesSettings extends React.Component {
                 <li>Email: {this.props.salesperson.salesperson.email}</li>
                 <p> Call From</p>
                 <PhoneSelector dispatch={this.props.dispatch} elements={elements} salespersonPhoneNumber={this.props.salespersonPhoneNumber}/>
+
             </div>
 
 

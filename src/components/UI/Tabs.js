@@ -15,7 +15,7 @@ class TabContents extends React.Component {
 
         switch (this.props.ui.tabIndex) {
             case 0:
-                return <Box><CallTab/></Box>;
+                return <Box stl><CallTab/></Box>;
             case 1:
                 return <Box><ErrorBoundary><VizList/></ErrorBoundary> </Box>;
             case 2:

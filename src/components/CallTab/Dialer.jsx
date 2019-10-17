@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {clientPhoneNumbersActions} from "../../actions";
-
+import CallIcon from '@material-ui/icons/Call';
 class PhoneDialer extends React.Component {
     constructor(props) {
         super(props);
@@ -11,6 +11,8 @@ class PhoneDialer extends React.Component {
         this.props.dispatch(clientPhoneNumbersActions.getNumberByContactID(this.props.id));
     }
     makeCall(){
+        console.log(this.props.salespersonPhoneNumber.active);
+        console.log(this.props.id);
         clientPhoneNumbersActions.makeCall(this.props.salespersonPhoneNumber.active,this.props.id)
 
     }
@@ -22,8 +24,8 @@ class PhoneDialer extends React.Component {
         if (this.props.id in this.props.clientPhoneNumber) {
             return (
                 <div>
-                    <button onClick={this.makeCall}>{this.props.clientPhoneNumber[this.props.id].number_type}</button>
-                    {this.props.clientPhoneNumber[this.props.id].number}
+                    <button title={this.props.clientPhoneNumber[this.props.id].number} onClick={this.makeCall}><CallIcon/> </button> {this.props.clientPhoneNumber[this.props.id].number_type}
+
 
 
                 </div>

@@ -1,4 +1,4 @@
-import {contactConstants} from '../constants';
+import {clientConstants, contactConstants} from '../constants';
 
 const INITIAL_STATE = {
     calls: [],
@@ -28,6 +28,11 @@ export function contact(state = INITIAL_STATE, action) {
 
         case contactConstants.GET_BY_SALES_SUCCESS:
             return {...state, contacts:  action.contact};
+        case contactConstants.ADD_CONTACT_SUCCESS:
+            return {...state.contacts, [action.data.contact_id]:  action.data};
+        case clientConstants.SET_CONTACT_ID:
+            return {...state.clientDetails[action.clientCode],
+                contact_id: [...state.clientDetails[action.clientCode].contact_id, action.contactID]};
 
         default:
             return state;

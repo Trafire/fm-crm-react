@@ -1,7 +1,7 @@
 import {salespersonPhoneNumberConstants} from '../constants';
 
 const INITIAL_STATE = {
-    active: 1, // todo: needs to update on load not just when changed
+    active: null, // todo: needs to update on load not just when changed
 };
 
 export function salespersonPhoneNumber(state = INITIAL_STATE, action) {

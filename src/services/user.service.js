@@ -1,8 +1,9 @@
 //import config from 'config';
 import {authHeader} from '../helpers/auth-header';
+import {config} from '../constants';
 
 //const config =  {apiUrl: 'http://localhost:8000'};
-const config =  {apiUrl: 'https://fmc-crm-252016.appspot.com'};
+//const config =  {apiUrl: 'https://fmc-crm-252016.appspot.com'};
 
 export const userService = {
     login,

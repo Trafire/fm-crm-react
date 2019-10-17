@@ -73,7 +73,6 @@ class Checkboxes extends React.Component {
                 checked: !this.state.checked,
             }
         );
-
     }
 
     render() {

@@ -1,13 +1,40 @@
-import {contactConstants} from '../constants';
+import {commentConstants, contactConstants} from '../constants';
 import {contactService} from "../services/contact.service";
+import {commentService} from "../services/comment.service";
+import {clientActions} from "./client.actions";
 
 export const contactActions = {
+    addContact,
     getByContactID,
     getBySalesID,
     getCallsMade,
     setAnswer,
 };
 
+function addContact(clientID, jobTitle, name, clientCode) {
+    const data = {'client_id': clientID, 'job_title': jobTitle, 'name':name,'phone_number_id':[], 'email_id': [] };
+    console.log(data);
+    return dispatch => {
+        contactService.addContact(data)
+            .then(
+                data => {
+                    dispatch(success(data));
+                },
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function success(data) {
+        const contactId = data.contact_id;
+        clientActions.getDetailsByCode(clientCode);
+        return {type: contactConstants.ADD_CONTACT_SUCCESS, data}
+
+    }
+
+    function failure(id, error) {
+        return {type: contactConstants.ADD_CONTACT_FAILURE, id, error}
+    }
+}
 function setAnswer(id, status) {
     return dispatch => {
         dispatch(request(id));

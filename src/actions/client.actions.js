@@ -3,14 +3,20 @@ import {clientService} from "../services/client.service";
 
 
 export const clientActions = {
+    setContactID,
     getByUserID,
     getDetailsByCode,
     setActiveByCode,
     setNextCallTime,
-    addContact,
-    addContactNumber,
-    addContactEmail,
+    //addContact,
+    //addContactNumber,
+    //addContactEmail,
+
 };
+
+function setContactID(clientCode, contactID) {
+    return { type: clientConstants.SET_CONTACT_ID, clientCode, contactID }
+}
 
 function setNextCallTime(client_code, callTime ) {
     return dispatch => {
@@ -31,7 +37,7 @@ function setNextCallTime(client_code, callTime ) {
     function success(client_code, callTime) { return { type: clientConstants.SET_NEXT_CALL_TIME_SUCCESS, client_code,callTime } }
     function failure(error) { return { type: clientConstants.SET_NEXT_CALL_TIME_FAILURE, client_code, error } }
 }
-
+/*
 function addContact(client_id, job_title,name ) {
     return dispatch => {
 
@@ -56,7 +62,7 @@ function addContactNumber(contact_id, number) {
 function addContactEmail(contact_id, address) {
 
 }
-
+*/
 function setActiveByCode(clientCode) {
     return {type: clientConstants.SET_ACTIVE_CLIENT, clientCode}
 }

@@ -12,7 +12,6 @@ import './CallList.css';
 const StyledListItem = withStyles({
     root: {
         'data-freshness > .1' : 'background: colourConstants.BLUE,',
-
         '&:hover': {
             background: colourConstants.FM_PALE_BLUE,
         },
@@ -40,44 +39,37 @@ const StyledListItem = withStyles({
     },
 })(ListItem);
 
-
 const callListStyle =
     {
-        width: 250,
+        position: "absolute",
+        width: "20%",
+        top: "10%",
+        bottom: 0,
+        overflow: 'auto'
     };
 
 class CallList extends React.Component {
-
-
-
     handleChange = (clientCode, id) => {
-
         this.props.dispatch(clientActions.getDetailsByCode(clientCode));
         this.props.dispatch(clientActions.setActiveByCode(clientCode));
         this.props.dispatch(contactActions.getCallsMade(clientCode));
-
-
     };
-
-
     render() {
-
         const {client} = this.props;
         const elements = client.client;
         const items = elements.map((value) =>
-
-
-            <ClientItems client_code={value.client_code} client_id={value.client_id} ratio={value.ratio}
+            <
+                ClientItems client_code={value.client_code} client_id={value.client_id} ratio={value.ratio}
                          className={callListStyle.items} button handleChange={this.handleChange}
-                         key={value.client_code}/>
+                         key={value.client_code}
+            />
         );
-
         return (
-            <List style={callListStyle} subheader={<ListSubheader component="div">Client List</ListSubheader>}>
-                {items}
-
-            </List>
-
+            <div style={{"height": "90%", "padding": "5px" }} >
+                <List style={callListStyle} subheader={<ListSubheader component="div"> </ListSubheader>}>
+                    {items}
+                </List>
+            </div>
         )
     }
 }

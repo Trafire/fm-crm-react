@@ -1,8 +1,6 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
@@ -12,12 +10,18 @@ import {commentsActions} from "../../actions";
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+import Drawer from '@material-ui/core/Drawer';
+
+const commentStyle =
+    {
+
+    };
 
 function CommentsDisplay(props) {
     const initials = props.firstName.substring(0, 1) + props.lastName.substring(0, 1);
     const items = [];
     const active = props.client.activeClient;
-    props.dispatch(commentsActions.getCommentsByClient(active));
+    //
     try {
         const activeId = props.client.clientDetails[active].client_id;
 
@@ -28,7 +32,7 @@ function CommentsDisplay(props) {
         }
 
         return (
-            <div>
+            <div style={commentStyle}>
                 {items}
             </div>
         );

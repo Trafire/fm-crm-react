@@ -5,7 +5,7 @@ import {unstable_Box as Box} from "@material-ui/core/es/Box";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import {clientActions, contactActions} from "../../actions";
+import {clientActions, contactActions, commentsActions} from "../../actions";
 import {PhoneDialer} from "./Dialer"
 import {CallTable} from "./CallTable"
 import {CommentsDisplay} from "./../Comments/Comments"
@@ -32,11 +32,20 @@ const styles = {
 };
 
 class CallTab extends React.Component {
-    componentDidMount() {
+
+    constructor(props) {
+        super(props);
         let dispatch = this.props.dispatch;
-        this.props.client.client.forEach(function (item, index) {
+        /*this.props.client.client.forEach(function (item, index) {
             dispatch(clientActions.getDetailsByCode(item.client_code));
-        });
+            dispatch(commentsActions.getCommentsByClient(item.client_code));
+        });*/
+
+    }
+    componentDidMount() {
+
+
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -82,10 +91,10 @@ class CallTab extends React.Component {
                 <Box>
 
                     <Box  display="flex" alignItems="flex-start">
-                    <DisplayDate displaydate={lastCall} clientCode={clientCode} title={"Last Call"} tip={""}/>
-                    <DisplayDate displaydate={nextCall} client title={"Next Call"} tip={"Double click to Change Time"}/>
+                    <DisplayDate displaydate={lastCall} clickable={false}clientCode={clientCode} title={"Last Call"} tip={""}/>
+                    <DisplayDate displaydate={nextCall} clickable={true} client title={"Next Call"} tip={"Double click to Change Time"}/>
                     </Box>
-                    <Box display="flex" alignItems="flex-start">
+                    <Box display="flex" alignItems="flex-start" flexWrap="wrap">
                         {contacts}
                     </Box>
                     <Box><CommentsDisplay/></Box>
@@ -100,38 +109,48 @@ class CallTab extends React.Component {
     }
 }
 
-const cardStyle = {width: 200, height: 275, margin: 20};
+const cardStyle = {
+    minWidth:200,
+    width: 200,
+    height: 275,
+    margin: 20,
+    padding:5,
+};
+
 
 export function ContactCard(props) {
     const clientName = props.clientName;
-    if (props.contact.hasOwnProperty(props.contactID)) {
-        const dialier = [];
-        for (const phoneID in  props.contact[props.contactID].phone_number_id) {
-            const id = props.contact[props.contactID].phone_number_id[phoneID];
+    try {
+        if (props.contact.hasOwnProperty(props.contactID)) {
+            const dialier = [];
+            for (const phoneID in props.contact[props.contactID].phone_number_id) {
+                const id = props.contact[props.contactID].phone_number_id[phoneID];
 
-            dialier.push(<PhoneDialer id={id}/>);
+                dialier.push(<PhoneDialer id={id}/>);
+            }
+
+            return (
+
+                <Card style={cardStyle} raised>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h4">
+                            {props.contact[props.contactID].name}
+                        </Typography>
+                        <Typography className={styles.title} color="textSecondary" gutterBottom>
+                            {props.contact[props.contactID].job_title}
+                        </Typography>
+                        <Typography className={styles.bullet} color="textSecondary" gutterBottom>
+                            {dialier}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            );
+        } else {
+            return <div></div>
         }
-
-        return (
-
-            <Card style={cardStyle} raised>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {props.contact[props.contactID].name}
-                    </Typography>
-                    <Typography className={styles.title} color="textSecondary" gutterBottom>
-                        {clientName}<br/>
-                        {props.contact[props.contactID].job_title}
-                    </Typography>
-                    <Typography className={styles.bullet} color="textSecondary" gutterBottom>
-                        <p>Phone Numbers</p>
-                        {dialier}
-                    </Typography>
-                </CardContent>
-            </Card>
-        );
-    } else {
-        return <div></div>
+    }
+    catch(e) {
+        return <div>Error and stuff </div>
     }
 }
 

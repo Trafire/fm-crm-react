@@ -16,7 +16,7 @@ const useStyles = makeStyles({
             borderRadius: 3,
             boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
             margin: "5px",
-            width: 220,
+            width: 325,
         },
         header: {
             background: '#88cdd4',
@@ -73,8 +73,7 @@ export function DisplayDate(props) {
                 <div className={classes.header}>{props.title}</div>
                 <Tooltip title={props.tip}>
                     <CardContent className={[classes.main]}>
-
-                        <DatePicker clientCode={props.clientCode} displayDate={displaydate}/>
+                        <DatePicker clickable={props.clickable} clientCode={props.clientCode} displayDate={displaydate}/>
                     </CardContent>
                 </Tooltip>
 
@@ -104,7 +103,9 @@ class DatePicker extends React.Component {
     }
 
     handleClick() {
-        this.setState({setDate: !this.state.setDate})
+        if (this.props.clickable) {
+            this.setState({setDate: !this.state.setDate})
+        }
     }
 
     componentWillReceiveProps(props) {
@@ -115,7 +116,8 @@ class DatePicker extends React.Component {
     }
 
     render() {
-
+        let tzoffset = (new Date()).getTimezoneOffset() * 60000;
+        console.log(tzoffset);
         if (!this.state.setDate) {
             const month = this.props.displayDate.toLocaleString('default', {month: 'short'});
             const day = this.props.displayDate.toLocaleString('default', {day: 'numeric'});
@@ -124,27 +126,36 @@ class DatePicker extends React.Component {
             console.log(this.props.displayDate);
             return (
                 <div onDoubleClick={this.handleClick}>
-                    <DateField dateStr={this.props.displayDate.toISOString().slice(0, 16)}/>
-
+                    <DateField clientCode={this.props.clientCode} dateStr={new Date(this.props.displayDate - tzoffset).toISOString().slice(0, 16)}/>
                 </div>);
         }
     }
 }
 
+const datePickerStyle = {
+    width: 250,
+    "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
+    display: "none"
+}};
+
 class DateField extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+
     }
 
     handleChange(e, date) {
+
         let d = new Date(date.target.value);
-        this.props.dispatch(clientActions.setNextCallTime(this.props.client.activeClient,d.toISOString()));
+        this.props.dispatch(clientActions.setNextCallTime(this.props.client.activeClient,d));
+        return d;
     }
 
     render() {
         return (
             <TextField
+                style={datePickerStyle}
                 key={this.props.dateStr}
                 onChange={(event) => this.handleChange("call", event)}
                 id="datetime-local"
