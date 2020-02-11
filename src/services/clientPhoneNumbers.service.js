@@ -11,12 +11,14 @@ export const clientPhoneNumbersService = {
 };
 
 function addNumber(data) {
-    console.log(data);
     const requestOptions = {
         method: 'POST',
         headers: JSONauthHeader(),
         body: JSON.stringify(data)
     };
+    console.log('###########ADD NUMBER SERVICE ##############');
+    console.log(data);
+    console.log('###########ADD NUMBER SERVICE ##############');
     return fetch(`${config.apiUrl}/api/clientphonenumbers/`, requestOptions).then(handleResponse);
 }
 function makeCall(salesID, clientID) {
@@ -24,7 +26,8 @@ function makeCall(salesID, clientID) {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(`${config.apiUrl}/api/phone_client/${salesID}/${clientID}`, requestOptions);
+
+    return fetch(`${config.apiUrl}/api/phone_client/${salesID}/${clientID}`, requestOptions).then(handleResponse);
 }
 
 function getByContactID(id) {

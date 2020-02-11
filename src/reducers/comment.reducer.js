@@ -1,4 +1,5 @@
 import {clientConstants, commentConstants} from "../constants"
+import update from 'immutability-helper';
 
 const INITIAL_STATE = {
     comments: [],
@@ -6,6 +7,9 @@ const INITIAL_STATE = {
 
 export function comment(state = INITIAL_STATE, action) {
     switch (action.type) {
+        case commentConstants.ADD_COMMENT:
+            return update(state, {comments: {$push: [action.data[0]]}});
+
         case commentConstants.GET_BY_ID_SUCCESS:
             return  Object.assign({}, state, {
                 comments: action.comments,
@@ -19,9 +23,9 @@ export function comment(state = INITIAL_STATE, action) {
                 error: action.error
             });
         case commentConstants.DELETE_SUCCESS:
-            return  Object.assign({}, state, {
-                comments: state.comments.splice(action.id,1),
-            });
+            return update(state, {
+                comments:
+                    {$splice: [[action.index, 1]] }});
         default:
             return state;
     }

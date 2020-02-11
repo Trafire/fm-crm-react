@@ -64,15 +64,15 @@ function addComment(time, text, salesperson_id, client_id, call_id, sticky = fal
     return dispatch => {
         commentService.addComment(data)
             .then(
-                id => {
-                    dispatch(success(id));
+                data => {
+                    dispatch(success(data));
                 },
                 error => dispatch(failure(error.toString()))
             );
     };
 
-    function success(id) {
-        return {type: commentConstants.GET_BY_ID_SUCCESS, id}
+    function success(data) {
+        return {type: commentConstants.ADD_COMMENT, data}
     }
 
     function failure(id, error) {
@@ -80,19 +80,19 @@ function addComment(time, text, salesperson_id, client_id, call_id, sticky = fal
     }
 }
 
-function deleteComment(id) {
+function deleteComment(id,index) {
     return dispatch => {
         commentService.deleteComment(id)
             .then(
                 id => {
-                    dispatch(success(id));
+                    dispatch(success(index));
                 },
                 error => dispatch(failure(error.toString()))
             );
     };
 
-    function success(id) {
-        return {type: commentConstants.DELETE_SUCCESS, id}
+    function success(index) {
+        return {type: commentConstants.DELETE_SUCCESS, index}
     }
 
     function failure(id, error) {

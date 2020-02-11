@@ -12,6 +12,7 @@ export const clientService = {
     addContactNumber,
     addContactEmail,
     setNextCallTime,
+    setCallInterval,
 
 };
 
@@ -21,9 +22,19 @@ function setNextCallTime(clientCode, data) {
         headers: JSONauthHeader(),
         body: JSON.stringify(data)
     };
+    console.log(data);
     return fetch(`${config.apiUrl}/api/clients/${clientCode}/`, requestOptions).then(handleResponse);
 }
 
+function setCallInterval(clientCode, data) {
+    const requestOptions = {
+        method: 'PATCH',
+        headers: JSONauthHeader(),
+        body: JSON.stringify(data)
+    };
+    console.log(data);
+    return fetch(`${config.apiUrl}/api/clients/${clientCode}/`, requestOptions).then(handleResponse);
+}
 
 function addContact(data) {
     const requestOptions = {

@@ -6,4 +6,6 @@ export {uiActions} from "./ui.actions"
 export {contactActions} from "./contact.actions"
 export {clientPhoneNumbersActions} from "./clientPhoneNumbers.actions"
 export {commentsActions} from  "./comment.actions"
-
+export {emailActions} from "./email.actions"
+export {assortmentActions} from "./assortment.actions"
+export {weeklyPricesActions} from "./weekPrices.actions"

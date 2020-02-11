@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import TextField from '@material-ui/core/TextField';
-import {unstable_Box as Box} from "@material-ui/core/es/Box";
+import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -9,7 +9,15 @@ import {clientActions, contactActions, commentsActions} from "../../actions";
 import {PhoneDialer} from "./Dialer"
 import {CallTable} from "./CallTable"
 import {CommentsDisplay} from "./../Comments/Comments"
-import {DisplayDate}  from "./../Dates"
+import {SearchableComments} from "./../Comments/SearchableComments"
+import PermPhoneMsgIcon from '@material-ui/icons/PermPhoneMsg';
+import IconButton from '@material-ui/core/IconButton';
+import {DisplayDate} from "./../Dates"
+import {EmailList} from "./ClientEmails"
+import {SalesNumberPicker} from "./SalesNumberPicker"
+import {Notifications} from "../Notification/Notifications";
+
+
 const styles = {
     card: {
         minWidth: 300,
@@ -28,7 +36,8 @@ const styles = {
     textField: {
 
         width: 200,
-    }
+    },
+    recordCallIcon: {}
 };
 
 class CallTab extends React.Component {
@@ -36,14 +45,9 @@ class CallTab extends React.Component {
     constructor(props) {
         super(props);
         let dispatch = this.props.dispatch;
-        /*this.props.client.client.forEach(function (item, index) {
-            dispatch(clientActions.getDetailsByCode(item.client_code));
-            dispatch(commentsActions.getCommentsByClient(item.client_code));
-        });*/
-
     }
-    componentDidMount() {
 
+    componentDidMount() {
 
 
     }
@@ -53,7 +57,7 @@ class CallTab extends React.Component {
             console.log(item.client_code);
             //this.props.dispatch(clientActions.getDetailsByCode(item.client_code));
         });*/
-
+        /*
         if (this.props.activeClient !== nextProps.activeClient) {
             let clientCode = nextProps.activeClient;
             if (this.props.clientDetails.hasOwnProperty(clientCode)) {
@@ -61,12 +65,12 @@ class CallTab extends React.Component {
                 for (const code in client.contact_id) {
                     let contactCode = client.contact_id[code];
 
-                    this.props.dispatch(contactActions.getByContactID(contactCode));
+                    //this.props.dispatch(contactActions.getByContactID(contactCode));
                 }
             } else {
                 this.props.dispatch(clientActions.getDetailsByCode(clientCode));
             }
-        }
+        }*/
     }
 
     render() {
@@ -89,16 +93,18 @@ class CallTab extends React.Component {
             //todo: change to visual
             return (
                 <Box>
-
-                    <Box  display="flex" alignItems="flex-start">
-                    <DisplayDate displaydate={lastCall} clickable={false}clientCode={clientCode} title={"Last Call"} tip={""}/>
-                    <DisplayDate displaydate={nextCall} clickable={true} client title={"Next Call"} tip={"Double click to Change Time"}/>
+                    <Notifications SelectedClient={clientCode}/>
+                    <Box><SalesNumberPicker/></Box>
+                    <Box display="flex" alignItems="flex-start">
+                        <DisplayDate displaydate={lastCall} clickable={false} clientCode={clientCode}
+                                     title={"Last Call"} tip={""}/>
+                        <DisplayDate displaydate={nextCall} clickable={true} client title={"Next Call"}
+                                     tip={"Double click to Change Time"}/>
                     </Box>
                     <Box display="flex" alignItems="flex-start" flexWrap="wrap">
                         {contacts}
                     </Box>
-                    <Box><CommentsDisplay/></Box>
-                    <Box><CallTable client/></Box>
+                    <Box><SearchableComments/></Box>
 
 
                 </Box>
@@ -110,11 +116,11 @@ class CallTab extends React.Component {
 }
 
 const cardStyle = {
-    minWidth:200,
-    width: 200,
-    height: 275,
+    minWidth: 250,
+    width: 250,
+    height: 350,
     margin: 20,
-    padding:5,
+    padding: 2,
 };
 
 
@@ -133,6 +139,7 @@ export function ContactCard(props) {
 
                 <Card style={cardStyle} raised>
                     <CardContent>
+
                         <Typography gutterBottom variant="h5" component="h4">
                             {props.contact[props.contactID].name}
                         </Typography>
@@ -141,15 +148,17 @@ export function ContactCard(props) {
                         </Typography>
                         <Typography className={styles.bullet} color="textSecondary" gutterBottom>
                             {dialier}
+
                         </Typography>
+                        <EmailList contactID={props.contactID}/>
+
                     </CardContent>
                 </Card>
             );
         } else {
             return <div></div>
         }
-    }
-    catch(e) {
+    } catch (e) {
         return <div>Error and stuff </div>
     }
 }
@@ -212,7 +221,15 @@ export function StoreCard(props) {
         </Card>
     )
 }
-
+/*
+function RecordManualCall() {
+    return (
+        <IconButton>
+            <PermPhoneMsgIcon/>
+        </IconButton>
+    );
+}
+*/
 function mapStateToProps(state) {
     const {client, contact} = state;
 

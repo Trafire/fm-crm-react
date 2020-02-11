@@ -18,16 +18,17 @@ const commentStyle =
     };
 
 function CommentsDisplay(props) {
-    const initials = props.firstName.substring(0, 1) + props.lastName.substring(0, 1);
+
     const items = [];
     const active = props.client.activeClient;
     //
     try {
         const activeId = props.client.clientDetails[active].client_id;
-
+        const initials = props.firstName.substring(0, 1) + props.lastName.substring(0, 1);
+        console.log(initials);
         for (const [index, comment] of props.comments.entries()) {
             if (comment.client_id === activeId) {
-                items.push(<CommentLine key={index} comment={comment} initials={initials} dispatch={props.dispatch}/>)
+                items.push(<CommentLine key={index} index={index} comment={comment} initials={initials} dispatch={props.dispatch}/>)
             }
         }
 
@@ -42,8 +43,9 @@ function CommentsDisplay(props) {
 }
 
 function DeleteCommentButton(props) {
+
     function delete_comment(){
-        props.dispatch(commentsActions.deleteComment(props.id));
+        props.dispatch(commentsActions.deleteComment(props.id, props.index));
     }
 
     return (<IconButton onClick={delete_comment} aria-label="delete">
@@ -77,7 +79,7 @@ function CommentLine(props) {
                                 variant="body2"
                                 color="textPrimary"
                             >
-                                {date.toString()}<DeleteCommentButton id={props.comment.id} dispatch={props.dispatch}/>
+                                {date.toString()}<DeleteCommentButton index={props.index} id={props.comment.id} dispatch={props.dispatch}/>
                             </Typography>
                             {props.comment.comment}
 

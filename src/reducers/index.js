@@ -12,8 +12,13 @@ import {contact} from "./contact.reducer"
 import {clientPhoneNumber} from "./clientPhoneNumbers.reducer"
 import {salespersonPhoneNumber} from "./salespersonPhoneNumbers.reducer"
 import {comment} from "./comment.reducer"
+import {userConstants} from '../constants'
+import {email} from "./email.reducer"
+import {notification} from "./notification.reducer"
+import {assortment} from "./assortment.reducers";
+import {weeklyPrices} from "./weeklyPrices.reducers"
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     alert,
     client,
     comment,
@@ -25,5 +30,18 @@ const rootReducer = combineReducers({
     ui,
     clientPhoneNumber,
     salespersonPhoneNumber,
+    email,
+    notification,
+    assortment,
+    weeklyPrices,
 });
+
+const rootReducer = (state, action) => {
+    if (action.type === userConstants.LOGOUT) {
+        state = undefined;
+    }
+
+    return appReducer(state, action)
+};
+
 export default rootReducer;

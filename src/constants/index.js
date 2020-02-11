@@ -9,4 +9,7 @@ export {salespersonPhoneNumberConstants} from "./salespersonPhoneNumbers.constan
 export {commentConstants} from "./comment.constants"
 export {colourConstants} from "./colours.constants"
 export {config} from "./apiSettings.constants"
-
+export {clientEmailConstants} from "./email.constants"
+export {notificationConstants} from "./notification.constants"
+export {assortmentConstants} from "./assortment.constants"
+export {weeklyPricesConstants} from "./weeklyPrices.constants"

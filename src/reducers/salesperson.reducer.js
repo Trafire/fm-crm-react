@@ -1,13 +1,16 @@
 import { salespersonConstants } from '../constants';
 
 const INITIAL_STATE = {
+            salesperson: {
+                sales_phone_number_id:[]
+        }
 
 };
 
 export function salesperson(state = INITIAL_STATE, action) {
     switch (action.type) {
         case salespersonConstants.GET_BY_USER_REQUEST:
-            return {
+            return {...state,
                 loading: true
             };
         case salespersonConstants.GET_BY_USER_SUCCESS:

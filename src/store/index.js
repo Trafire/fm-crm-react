@@ -8,8 +8,10 @@ const store = createStore(
     rootReducer,
     applyMiddleware(
         thunkMiddleware,
-        loggerMiddleware
+        //loggerMiddleware
     )
 );
+
+
 
 export default store;

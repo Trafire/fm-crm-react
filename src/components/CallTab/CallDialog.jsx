@@ -39,7 +39,7 @@ export default function CommentDialog(props) {
             <Button variant="contained"
                     onClick={handleClickOpen}
                     color="primary">
-                Add Comment
+                Make a Note
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Comments</DialogTitle>

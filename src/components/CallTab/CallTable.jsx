@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import CommentDialog from '../CallTab/CallDialog'
+import StickyHeadTable from './PagenatedTable'
 
 
 class CallTable extends React.Component {
@@ -26,7 +27,12 @@ class CallTable extends React.Component {
                     <TableCell align="center"><Checkboxes id={call.call_id} dispatch={this.props.dispatch}
                                                           checked={call.answered}/></TableCell>
                     <TableCell align="center">
-                        <CommentDialog call_id={call.call_id} clientId={this.props.client.clientDetails[this.props.client.activeClient]['client_id']} clientCode={this.props.client.activeClient} salesperson_id={this.props.salesperson.salesperson} dispatch={this.props.dispatch} value={this.props.clientPhoneNumber[call.phone_number_id].phone_number_id}/>
+                        <CommentDialog call_id={call.call_id}
+                                       clientId={this.props.client.clientDetails[this.props.client.activeClient]['client_id']}
+                                       clientCode={this.props.client.activeClient}
+                                       salesperson_id={this.props.salesperson.salesperson}
+                                       dispatch={this.props.dispatch}
+                                       value={this.props.clientPhoneNumber[call.phone_number_id].phone_number_id}/>
 
                     </TableCell>
 
@@ -37,6 +43,31 @@ class CallTable extends React.Component {
             console.warn(error);
             return <div>Loading</div>
         }
+
+        function createData(name, number, time, answered, comments) {
+
+            return {name, number, time, answered, comments};
+        }
+
+        const rows = [];
+
+        for (const index in this.props.contact.calls) {
+            const call = this.props.contact.calls[index];
+            const name = this.props.contact.contacts[this.props.clientPhoneNumber[call.phone_number_id].contact_id].name;
+            const number = this.props.clientPhoneNumber[call.phone_number_id].number_type;
+            const time = new Date(call.time_of_call).toDateString() + " " + new Date(call.time_of_call).toLocaleTimeString();
+            const answered = (<Checkboxes id={call.call_id} dispatch={this.props.dispatch}
+                                         checked={call.answered}/>);
+            const comments = (<CommentDialog call_id={call.call_id}
+                                            clientId={this.props.client.clientDetails[this.props.client.activeClient]['client_id']}
+                                            clientCode={this.props.client.activeClient}
+                                            salesperson_id={this.props.salesperson.salesperson}
+                                            dispatch={this.props.dispatch}
+                                            value={this.props.clientPhoneNumber[call.phone_number_id].phone_number_id}/>
+            );
+            rows.push(createData(name, number, time, answered, comments))
+        }
+
 
         return (
             <div>
@@ -52,6 +83,7 @@ class CallTable extends React.Component {
                         {listItems}
                     </TableHead>
                 </Table>
+
             </div>
         );
 

@@ -2,16 +2,15 @@ import React from "react";
 import {makeStyles} from '@material-ui/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import {red} from '@material-ui/core/colors';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
 import {connect} from "react-redux";
 import {clientActions} from "../../actions";
+import Slider from "@material-ui/core/Slider";
 
 // A style sheet
 const useStyles = makeStyles({
         root: {
-            background: 'red',
             border: 0,
             borderRadius: 3,
             boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
@@ -36,7 +35,7 @@ const useStyles = makeStyles({
             textAlign:
                 'center',
             fontSize:
-                '12px',
+                '20px',
         },
         container: {
             display: 'flex',
@@ -49,7 +48,54 @@ const useStyles = makeStyles({
 
     })
 ;
+export const WeekSlider = (props) => {
+    const handleChange = props.handleChange;
+    const valuetext = props.valuetext;
+    const value = props.value;
 
+    const marks = [
+        {
+            value: 0,
+            label: 'Sun'
+        },
+        {
+            value: 1,
+            label: 'Mon'
+        },
+        {
+            value: 2,
+            label: 'Tue'
+        },
+        {
+            value: 3,
+            label: 'Wed',
+        },
+        {
+            value: 4,
+            label: 'Thu',
+        },
+        {
+            value: 5,
+            label: 'Fri',
+        },
+        {
+            value: 6,
+            label: 'Sat',
+        },
+    ];
+
+    return (<Slider
+        value={value}
+        valueLabelFormat={x => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][x]}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        aria-labelledby="range-slider"
+        min={0}
+        max={6}
+        marks={marks}
+
+    />)
+};
 
 export function DisplayDate(props) {
 
@@ -73,7 +119,8 @@ export function DisplayDate(props) {
                 <div className={classes.header}>{props.title}</div>
                 <Tooltip title={props.tip}>
                     <CardContent className={[classes.main]}>
-                        <DatePicker clickable={props.clickable} clientCode={props.clientCode} displayDate={displaydate}/>
+                        <DatePicker clickable={props.clickable} clientCode={props.clientCode}
+                                    displayDate={displaydate}/>
                     </CardContent>
                 </Tooltip>
 
@@ -93,14 +140,14 @@ class DatePicker extends React.Component {
             setDate: false,
         };
         this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
 
     }
 
-    handleChange(e, date) {
+    /*handleChange(e, date) {
         console.log(e);
         console.log(date);
-    }
+    }*/
 
     handleClick() {
         if (this.props.clickable) {
@@ -117,16 +164,15 @@ class DatePicker extends React.Component {
 
     render() {
         let tzoffset = (new Date()).getTimezoneOffset() * 60000;
-        console.log(tzoffset);
         if (!this.state.setDate) {
             const month = this.props.displayDate.toLocaleString('default', {month: 'short'});
             const day = this.props.displayDate.toLocaleString('default', {day: 'numeric'});
             return <div onDoubleClick={this.handleClick}> {month} {day} </div>;
         } else {
-            console.log(this.props.displayDate);
             return (
                 <div onDoubleClick={this.handleClick}>
-                    <DateField clientCode={this.props.clientCode} dateStr={new Date(this.props.displayDate - tzoffset).toISOString().slice(0, 16)}/>
+                    <DateField clientCode={this.props.clientCode}
+                               dateStr={new Date(this.props.displayDate - tzoffset).toISOString().slice(0, 16)}/>
                 </div>);
         }
     }
@@ -135,20 +181,22 @@ class DatePicker extends React.Component {
 const datePickerStyle = {
     width: 250,
     "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
-    display: "none"
-}};
+        display: "none"
+    }
+};
 
 class DateField extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.initial_datestr = this.props.dateStr;
 
     }
 
     handleChange(e, date) {
 
         let d = new Date(date.target.value);
-        this.props.dispatch(clientActions.setNextCallTime(this.props.client.activeClient,d));
+        this.props.dispatch(clientActions.setNextCallTime(this.props.client.activeClient, d));
         return d;
     }
 
@@ -156,17 +204,35 @@ class DateField extends React.Component {
         return (
             <TextField
                 style={datePickerStyle}
-                key={this.props.dateStr}
+                //key={this.props.dateStr}
                 onChange={(event) => this.handleChange("call", event)}
                 id="datetime-local"
                 type="datetime-local"
-                defaultValue={this.props.dateStr}//"2017-05-24T10:30"
+                defaultValue={this.initial_datestr}//"2017-05-24T10:30"
                 InputLabelProps={{
                     shrink: true,
                 }}
             />
         );
     }
+}
+
+export const weekOfYear = function (date) {
+    var d = new Date(+date);
+    d.setHours(0, 0, 0);
+    d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+    let sunday = 0;
+    if (d.getDay() === 0) {
+        sunday = 1;
+    }
+    return sunday + Math.ceil((((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7) + 1) / 7);
+};
+
+export function FormatDate(d) {
+    if (d == null) {
+        d = new Date();
+    }
+
 }
 
 function mapStateToProps(state) {
@@ -177,5 +243,8 @@ function mapStateToProps(state) {
     };
 }
 
+
 const connected_component = connect(mapStateToProps);
 DateField = connected_component(DateField);
+
+

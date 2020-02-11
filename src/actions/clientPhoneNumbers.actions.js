@@ -13,13 +13,14 @@ function addNumber(contactID, numberType, number) {
         clientPhoneNumbersService.addNumber(data)
             .then(
                 id => {
-                    dispatch(success(contactID));
+                    dispatch(success(id));
                 },
                 error => dispatch(failure(error.toString()))
             );
     };
-    function success(contactID,) {
-        return getNumberByContactID(contactID);
+    function success(contactData) {
+        console.log(contactData.phone_number_id);
+        return getNumberByContactID(contactData.phone_number_id);
     }
 
     function failure(id, error) {
@@ -28,8 +29,12 @@ function addNumber(contactID, numberType, number) {
 }
 
 function makeCall (salesID, clientID) {
-    clientPhoneNumbersService.makeCall(salesID,clientID)
-
+    clientPhoneNumbersService.makeCall(salesID,clientID).then(
+        call_id => {
+            console.log(call_id.call_id);
+        }
+    );
+    return  {type: clientPhoneNumberConstants.CALL_CLIENT};
 }
 
 function getNumberByContactID(id) {

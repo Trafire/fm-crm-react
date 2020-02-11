@@ -3,17 +3,17 @@ import {clientConstants, contactConstants} from '../constants';
 const INITIAL_STATE = {
     calls: [],
     contacts: {},
+    callsMadeToday: 0,
 };
 
 export function contact(state = INITIAL_STATE, action) {
-
 
     switch (action.type) {
         case contactConstants.GET_BY_ID_SUCCESS:
             let details = Object.assign({}, state.contacts, {
                 [action.id]: action.contact,
             });
-            return  Object.assign({}, state, {
+            return Object.assign({}, state, {
                 contacts: details,
             });
 
@@ -27,12 +27,16 @@ export function contact(state = INITIAL_STATE, action) {
             return state;
 
         case contactConstants.GET_BY_SALES_SUCCESS:
-            return {...state, contacts:  action.contact};
+            return {...state, contacts: action.contact};
+
         case contactConstants.ADD_CONTACT_SUCCESS:
-            return {...state.contacts, [action.data.contact_id]:  action.data};
+            return {...state.contacts, [action.data.contact_id]: action.data};
+
         case clientConstants.SET_CONTACT_ID:
-            return {...state.clientDetails[action.clientCode],
-                contact_id: [...state.clientDetails[action.clientCode].contact_id, action.contactID]};
+            return {
+                ...state.clientDetails[action.clientCode],
+                contact_id: [...state.clientDetails[action.clientCode].contact_id, action.contactID]
+            };
 
         default:
             return state;

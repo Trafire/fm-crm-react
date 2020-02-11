@@ -17,6 +17,9 @@ import { PrivateRoute } from './PrivateRoute';
 import { HomePage } from './HomePage/HomePage';
 import { LoginPage } from './LoginPage/LoginPage';
 import { RegisterPage } from './RegisterPage/RegisterPage';
+import {DataManager} from "./DataManager/DataManager";
+import { Overview } from "./BuyerOverview/BuyerOverview"
+import { ResponsiveDrawer } from "./BuyerPage/BuyerPage"
 
 
 class App extends React.Component {
@@ -40,9 +43,12 @@ class App extends React.Component {
                         }
                         <Router history={history}>
                             <div>
+                                <DataManager/>
                                 <PrivateRoute exact path="/" component={HomePage} />
+                                <PrivateRoute exact path="/buyer" component={ResponsiveDrawer} />
                                 <Route path="/login" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />
+
                             </div>
                         </Router>
                     </div>

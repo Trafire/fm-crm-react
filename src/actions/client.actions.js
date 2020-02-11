@@ -8,11 +8,35 @@ export const clientActions = {
     getDetailsByCode,
     setActiveByCode,
     setNextCallTime,
+    setCallRatio,
+    getCallTimes,
+    setCallInterval,
     //addContact,
     //addContactNumber,
     //addContactEmail,
 
 };
+
+
+
+
+function getCallTimes(clientCode) {
+    return dispatch => {
+        dispatch(requestGetDetailsByCode(clientCode));
+        clientService.getDetailsByCode(clientCode)
+            .then(
+                clientDetails => {
+                    dispatch(successGetDetailsByCode(clientDetails, clientCode));
+
+                },
+                error => dispatch(failureGetDetailsByCode(error.toString()))
+            );
+    };
+}
+
+function setCallRatio(index) {
+    return { type: clientConstants.SET_CALL_RATIO, index }
+}
 
 function setContactID(clientCode, contactID) {
     return { type: clientConstants.SET_CONTACT_ID, clientCode, contactID }
@@ -36,6 +60,29 @@ function setNextCallTime(client_code, callTime ) {
     function request(client_code,callTime) { return { type: clientConstants.SET_NEXT_CALL_TIME_REQUEST, client_code, callTime } }
     function success(client_code, callTime) { return { type: clientConstants.SET_NEXT_CALL_TIME_SUCCESS, client_code,callTime } }
     function failure(error) { return { type: clientConstants.SET_NEXT_CALL_TIME_FAILURE, client_code, error } }
+}
+
+
+function setCallInterval(client_code, interval ) {
+    console.log(client_code);
+    console.log(interval);
+    return dispatch => {
+
+        dispatch(request(client_code,interval));
+        clientService.setCallInterval(client_code, {
+            'client_code':client_code,
+            'call_interval':interval,
+        })
+            .then(
+                contactId => {
+                    dispatch(success(client_code,interval));
+                },
+                error => dispatch(failure(error.toString()))
+            );
+    };
+    function request(client_code,call_interval) { return { type: clientConstants.SET_CALL_INTERVAL_REQUEST, client_code, call_interval } }
+    function success(client_code, call_interval) { return { type: clientConstants.SET_CALL_INTERVAL_SUCCESS, client_code,call_interval } }
+    function failure(error) { return { type: clientConstants.SET_CALL_INTERVAL_FAILURE, client_code, error } }
 }
 /*
 function addContact(client_id, job_title,name ) {

@@ -22,7 +22,7 @@ class SalesSettings extends React.Component {
             }
             catch (err) {
                 console.error(err);
-                this.props.dispatch(salespersonPhoneNumbersActions.getNumberByContactID(value));
+                this.props.dispatch(salespersonPhoneNumbersActions.getNumberByContactID(value)); //todo: move dispatch to DataManager
             }
         }
 
@@ -30,8 +30,7 @@ class SalesSettings extends React.Component {
             <div>
                 <li>Salesperson: {this.props.salesperson.salesperson.first_name} {this.props.salesperson.salesperson.last_name}</li>
                 <li>Email: {this.props.salesperson.salesperson.email}</li>
-                <p> Call From</p>
-                <PhoneSelector dispatch={this.props.dispatch} elements={elements} salespersonPhoneNumber={this.props.salespersonPhoneNumber}/>
+
 
             </div>
 
@@ -49,8 +48,6 @@ class PhoneSelector extends React.Component {
     }
 
     handleChange = event => {
-        console.log(event.target.value);
-        console.log(this.props.salespersonPhoneNumber);
         this.props.dispatch(salespersonPhoneNumbersActions.setSenderID(event.target.value))
     };
     updateParent = event => {
@@ -61,7 +58,6 @@ class PhoneSelector extends React.Component {
         const items = [];
         const elements = this.props.elements;
         for (const [index, value] of elements.entries()) {
-            console.log();
             const numbers = this.props.salespersonPhoneNumber[value];
             try {
                 items.push(<option key={index} value={value} >{numbers.number_description}</option>);

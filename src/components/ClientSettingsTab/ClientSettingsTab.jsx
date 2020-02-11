@@ -1,39 +1,49 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
-import {clientPhoneNumbersActions, contactActions} from "../../actions";
+import {clientPhoneNumbersActions, contactActions, emailActions, clientActions} from "../../actions";
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {useForm} from "./formHooks"
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+
+const contactCell = {
+    margin: "3px",
+};
+const contactForm = {
+    margin: 5,
+    padding: 5,
+    display: "inline-block",
+
+
+};
+const ContactsStyle = {
+    display: "inline-block",
+    margin: 10,
+};
 
 class ClientSettingsTab extends React.Component {
 
     render() {
         const clientCode = this.props.client.activeClient;
-
         const clientDetails = this.props.client.clientDetails[clientCode];
         const contacts = [];
         try {
-
             for (const id in clientDetails.contact_id) {
                 const contact_num = clientDetails.contact_id[id];
-                //this.props.dispatch(contactActions.getByContactID(contact_num));
-                //console.log(contact_num);
                 contacts.push(this.props.contact.contacts[contact_num]);
             }
-            /*return (
-                <div>
-                    <ContactInfo clientDetails={clientDetails}/>
-                    <AddContactNumber/><br/>
-                    <SelectContacts contacts={contacts}/>
-                </div>
-            );*/
             return (
-                <div>Clients <ContactTabs clientCode={clientDetails.client_code} dispatch={this.props.dispatch}
-                                          clientID={clientDetails.client_id}
-                                          clientPhoneNumber={this.props.clientPhoneNumber}
-                                          contacts={this.props.contact.contacts} contactIds={clientDetails.contact_id}/>
+                <div>
+                    <ContactTabs email={this.props.email} clientCode={clientDetails.client_code}
+                                 dispatch={this.props.dispatch}
+                                 clientID={clientDetails.client_id}
+                                 clientPhoneNumber={this.props.clientPhoneNumber}
+                                 contacts={this.props.contact.contacts}
+                                 contactIds={clientDetails.contact_id}
+                                 interval={clientDetails.call_interval}
+                    />
                 </div>);
         } catch {
             return <div/>
@@ -43,7 +53,6 @@ class ClientSettingsTab extends React.Component {
 
 
 function ContactTabs(props) {
-
     const [tabIndex, setIndex] = useState(0);
     const tabs = [];
     let count = 0;
@@ -58,61 +67,123 @@ function ContactTabs(props) {
         }
 
     }
-    //tabs.push();
 
     return (
         <div>
-            <AppBar position="static" color="default">
-                <Tabs variant="scrollable"
-                      scrollButtons="on"
-                      value={tabIndex}
-                      onChange={(event, newValue) => setIndex(newValue)}>
-                    {tabs}
-                    <Tab label="ADD"/>
-                </Tabs>
-            </AppBar>
-            <ContactTab clientCode={props.client_code} clientID={props.clientID} count={count} dispatch={props.dispatch}
-                        clientPhoneNumber={props.clientPhoneNumber} index={tabIndex}
-                        contactsInfo={props.contacts[props.contactIds[tabIndex]]}/>
+            <div style={ContactsStyle}>
+                <AppBar position="static" color="default">
+                    <Tabs variant="scrollable"
+                          scrollButtons="on"
+                          value={tabIndex}
+                          onChange={(event, newValue) => setIndex(newValue)}>
+                        {tabs}
+                        <Tab label="Add New Contact"/>
+                    </Tabs>
+                </AppBar>
 
+                <ContactTab email={props.email} clientCode={props.clientCode} clientID={props.clientID} count={count}
+                            dispatch={props.dispatch}
+                            clientPhoneNumber={props.clientPhoneNumber} index={tabIndex}
+                            contactsInfo={props.contacts[props.contactIds[tabIndex]]}/>
+            </div>
+            <hr/>
+            <div style={contactCell}>
+                <h3>Call Interval</h3>
+                <p> Here you can set how many days a part your calls will reset to after each call.</p>
+                Current Interval: {props.interval} Days
+                <ChangeCallDuration clientCode={props.clientCode} dispatch={props.dispatch}/>
+            </div>
         </div>);
 }
 
 function ContactInfo(props) {
     return (
         <div>
-            <p>Name: {props.contactsInfo.name}</p>
-            <p>Title: {props.contactsInfo.job_title}</p>
+            <p>In this Section you can add New Telephone or Emails Addresses for {props.contactsInfo.name}.</p>
+            <p>Simply fill in Either the email or phone Information and click the add button</p>
         </div>)
 }
 
 function ContactNumbers(props) {
-    console.log(props.numbersIds);
-    console.log(props.clientPhoneNumber);
     const numbers = [];
-    for (const id in props.numbersIds) {
-        const clientNumberId = props.numbersIds[id];
-        const numberInfo = props.clientPhoneNumber[clientNumberId];
-        numbers.push(
-            <tr>
-                <td>{numberInfo.number_type}</td>
-                <td>{numberInfo.number}</td>
-            </tr>
-        );
+    try {
+        for (const id in props.numbersIds) {
 
+            const clientNumberId = props.numbersIds[id];
+
+            const numberInfo = props.clientPhoneNumber[clientNumberId];
+            clientPhoneNumbersActions.getNumberByContactID(numberInfo);
+            numbers.push(
+                <tr>
+                    <td>{numberInfo.number_type}</td>
+                    <td>{numberInfo.number}</td>
+                </tr>
+            );
+
+        }
+        return (<table>
+            <tr>
+                <thead><h3>Phone Numbers</h3></thead>
+            </tr>
+            <tbody>{numbers}</tbody>
+        </table>)
+    } catch (e) {
+        return <h3>Phone Numbers</h3>;
     }
-    return (<table>
-        <tbody>{numbers}</tbody>
-    </table>)
 }
 
+function ContactEmails(props) {
+    const numbers = [];
+
+    try {
+        for (const id in props.emailIds) {
+            const clientNumberId = props.emailIds[id];
+            const numberInfo = props.email[clientNumberId];
+            numbers.push(
+                <tr>
+                    <td style={contactCell}>{numberInfo.description}</td>
+                    <td>{numberInfo.email}</td>
+                </tr>
+            );
+
+        }
+        return (<table>
+            <thead><h3>Emails</h3></thead>
+            <tbody>{numbers}</tbody>
+        </table>)
+    } catch (e) {
+        return <h3>Emails</h3>;
+    }
+}
+
+const ChangeCallDuration = (props) => {
+    const onChangeDuration = () => {
+        props.dispatch(clientActions.setCallInterval(props.clientCode, inputs.duration));
+    };
+    const {inputs, handleInputChange, handleSubmit} = useForm(onChangeDuration);
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <TextField
+                    type="integer"
+                    label="Call Interval"
+                    name="duration"
+                    onChange={handleInputChange}
+                    value={inputs.duration || ""}
+                    required
+                />
+            </div>
+
+            <button type="submit">Change Call Interval</button>
+        </form>
+    );
+};
 
 const AddNumber = (props) => {
     const onAddNumber = () => {
-        //this.props.dispatch();
+
         props.dispatch(clientPhoneNumbersActions.addNumber(props.contactID, inputs.numberType, inputs.number));
-
-
+        props.dispatch(clientActions.getDetailsByCode(props.clientCode));
     };
     const {inputs, handleInputChange, handleSubmit} = useForm(onAddNumber);
     return (
@@ -136,20 +207,60 @@ const AddNumber = (props) => {
                 />
             </div>
 
-            <button type="submit">Add</button>
+            <button type="submit">Add Number</button>
         </form>
     );
 };
 
+const AddEmail = (props) => {
+    const onAddEmail = () => {
+
+        props.dispatch(emailActions.addEmail(props.contactID, inputs.emailDescription, inputs.emailAddress, props.clientID));
+        props.dispatch(clientActions.getDetailsByCode(props.clientCode));
+    };
+    const {inputs, handleInputChange, handleSubmit} = useForm(onAddEmail);
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <TextField
+                    type="text"
+                    label="Email Description"
+                    name="emailDescription"
+                    onChange={handleInputChange}
+                    value={inputs.emailDescription || ""}
+                    required
+                /> <br/>
+                <TextField
+                    type="email"
+                    label="Email Address"
+                    name="emailAddress"
+                    onChange={handleInputChange}
+                    value={inputs.emailAddress || ""}
+                    required
+                />
+            </div>
+
+            <button type="submit">Add Email</button>
+        </form>
+    );
+};
+
+
 function AddContact(props) {
     const onAddContact = () => {
-        console.log(inputs.jobTitle);
-        console.log(inputs.contactName);
-        console.log(props.clientID);
-        props.dispatch(contactActions.addContact(props.clientID, inputs.jobTitle, inputs.contactName, props.client_code));
+        props.dispatch(contactActions.addContact(props.clientID, inputs.jobTitle, inputs.contactName, props.clientCode));
+        props.dispatch(clientActions.getDetailsByCode(props.clientCode));
     };
     const {inputs, handleInputChange, handleSubmit} = useForm(onAddContact);
     return (
+        <div>
+            <header>
+
+                <p>Below you can create a new contact that you work with at {props.clientCode}.</p>
+                <p>For Instance:</p>
+                <p>Contact Name: John Smith</p>
+                <p>Job title: Owner</p>
+            </header>
         <form onSubmit={handleSubmit}>
             <div>
                 <TextField
@@ -172,8 +283,9 @@ function AddContact(props) {
 
             </div>
 
-            <button type="submit">Add</button>
+            <button type="submit">Add Contact</button>
         </form>
+        </div>
     );
 }
 
@@ -182,22 +294,31 @@ function ContactTab(props) {
     try {
 
         if (props.count === props.index) {
-            return <AddContact clientCode={props.client_code} clientID={props.clientID} dispatch={props.dispatch}/>
+            return <AddContact clientCode={props.clientCode} clientID={props.clientID} dispatch={props.dispatch}/>
         }
         return (
             <div>
                 <h3>Contact Info</h3>
-
                 <ContactInfo contactsInfo={props.contactsInfo}/>
+                <div style={contactForm}>
+                    <ContactNumbers clientPhoneNumber={props.clientPhoneNumber}
+                                    numbersIds={props.contactsInfo.phone_number_id}/>
+                    <AddNumber clientCode={props.clientCode} dispatch={props.dispatch}
+                               contactID={props.contactsInfo.contact_id}/>
+                </div>
+                <div style={contactForm}>
+                    <ContactEmails email={props.email}
+                                   emailIds={props.contactsInfo.email_id}/>
+                    <AddEmail clientCode={props.clientCode} dispatch={props.dispatch}
+                              contactID={props.contactsInfo.contact_id}
+                              clientID={props.contactsInfo.client_id}/>
+                </div>
 
-                <ContactNumbers clientPhoneNumber={props.clientPhoneNumber}
-                                numbersIds={props.contactsInfo.phone_number_id}/>
 
-                <AddNumber dispatch={props.dispatch} contactID={props.contactsInfo.contact_id}/>
             </div>
         )
     } catch (e) {
-        return <div>{e}</div>;
+        return <div/>;
     }
 
 
@@ -275,12 +396,13 @@ function SelectContacts(props) {
 
 
 function mapStateToProps(state) {
-    const {client, contact, clientPhoneNumber} = state;
+    const {client, contact, clientPhoneNumber, email} = state;
 
     return {
         client,
         contact,
         clientPhoneNumber,
+        email,
     };
 }
 

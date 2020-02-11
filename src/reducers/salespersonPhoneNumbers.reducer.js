@@ -7,6 +7,13 @@ const INITIAL_STATE = {
 export function salespersonPhoneNumber(state = INITIAL_STATE, action) {
     switch (action.type) {
         case salespersonPhoneNumberConstants.GET_BY_ID_SUCCESS:
+            if (state.active === null) {
+                return Object.assign({}, state, {
+                    [action.id]: action.contact,
+                    active: action.id,
+                });
+            }
+
             return Object.assign({}, state, {
                 [action.id]: action.contact, //todo
             });
