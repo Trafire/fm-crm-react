@@ -8,95 +8,8 @@
     <bookmark url="file://$PROJECT_DIR$/src/constants/index.js" line="8" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6413f99-8d66-4981-abc8-ccf19f287092" name="Default Changelist" comment="moin">
-      <change afterPath="$PROJECT_DIR$/sendMail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/actions/assortment.actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/actions/email.actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/actions/notification.actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/actions/weekPrices.actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Assortment/AssortmentProperty.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Assortment/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BuyerOpenOrders/BuyerOpenOrders.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BuyerOpenOrders/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BuyerOverview/BuyerOverview.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BuyerOverview/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BuyerPage/BuyerPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BuyerPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CallTab/ClientEmails.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CallTab/PagenatedTable.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CallTab/SalesNumberPicker.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Comments/AddComment.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Comments/CommentRow.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Comments/SearchableComments.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DataManager/DataManager.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DataManager/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Email/Email.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Forms/formHooks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Notification/Notifications.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Notification/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Pdf/Pdf.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Pricing/PriceAssortment.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Pricing/Pricing.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Pricing/PricingArticleInfo.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Pricing/PricingButton.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Pricing/PricingTable.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Pricing/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Tables/Tables.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Tables/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Widgets/SearchField.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Widgets/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/assortment.constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/email.constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/notification.constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/weeklyPrices.constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/assortment.reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/email.reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/notification.reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/weeklyPrices.reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/assortment.service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/email.service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/notification.service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/openOrders.service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/weeklyPrices.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="d6413f99-8d66-4981-abc8-ccf19f287092" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/app.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/client.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/client.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/clientPhoneNumbers.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/clientPhoneNumbers.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/comment.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/comment.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/contact.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/contact.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CallList/CallList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CallList/CallList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CallTab/CallDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CallTab/CallDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CallTab/CallTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CallTab/CallTab.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CallTab/CallTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CallTab/CallTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CallTab/Dialer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CallTab/Dialer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ClientSettingsTab/ClientSettingsTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClientSettingsTab/ClientSettingsTab.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Comments/Comments.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/Comments.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dates/dates.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dates/dates.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ErrorHandling/ErrorBoundary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ErrorHandling/ErrorBoundary.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HomePage/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomePage/HomePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SalesDataTab/SalesDataTab2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SalesDataTab/SalesDataTab2.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SalesSettings/SalesSettings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SalesSettings/SalesSettings.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/NavTabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/NavTabs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Tabs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/apiSettings.constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/apiSettings.constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/client.constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/client.constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/client.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/client.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/comment.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/comment.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/contact.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/contact.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/salesperson.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/salesperson.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/salespersonPhoneNumbers.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/salespersonPhoneNumbers.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/users.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/users.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/client.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/client.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/clientPhoneNumbers.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/clientPhoneNumbers.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -112,18 +25,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Tables/Tables.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/BuyerOverview/BuyerOverview.jsx">
           <provider selected="true" editor-type-id="text-editor">
@@ -157,7 +58,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Pdf/Pdf.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="768">
@@ -165,6 +66,24 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -189,24 +108,6 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Widgets/SearchField.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="52" selection-start-column="52" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/constants/apiSettings.constants.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -362,45 +263,6 @@
               <item name="fm-crm-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="fm-crm-react" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="fm-crm-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fm-crm-react" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fm-crm-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fm-crm-react" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fm-crm-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fm-crm-react" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="BuyerOpenOrders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fm-crm-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fm-crm-react" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="BuyerPage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fm-crm-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fm-crm-react" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Pdf" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fm-crm-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fm-crm-react" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Pricing" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -521,7 +383,7 @@
       <workItem from="1579272731118" duration="39455000" />
       <workItem from="1579813518837" duration="6070000" />
       <workItem from="1580934009320" duration="104880000" />
-      <workItem from="1581356559394" duration="8172000" />
+      <workItem from="1581356559394" duration="9872000" />
     </task>
     <task id="LOCAL-00001" summary="redux set up">
       <created>1552998859670</created>
@@ -586,11 +448,18 @@
       <option name="project" value="LOCAL" />
       <updated>1571326917979</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="large update">
+      <created>1581446702824</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1581446702824</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1137828000" />
+    <option name="totallyTimeSpent" value="1139528000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -603,6 +472,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2688" y="-380" width="1096" height="1936" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.500516" side_tool="true" weight="0.2410208" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -660,7 +530,8 @@
     <MESSAGE value="updated reports" />
     <MESSAGE value="code cleanup" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="large update" />
+    <option name="LAST_COMMIT_MESSAGE" value="large update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -683,29 +554,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/services/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/CallList/CallList.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="131" column="16" lean-forward="true" selection-start-line="131" selection-start-column="16" selection-end-line="131" selection-end-column="104" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/weeklyPrices.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/PrivateRoute.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -729,13 +577,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/BuyerPage/index.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/CallTab/CallTab.jsx">
       <provider selected="true" editor-type-id="text-editor">
@@ -807,9 +648,6 @@
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1026,6 +864,35 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
         </state>
       </provider>
     </entry>
